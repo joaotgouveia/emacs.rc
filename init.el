@@ -1,5 +1,6 @@
 ;; Minimalistic UI
 (setq-default inhibit-startup-message t            ; Disable startup screen
+              ring-bell-function 'ignore           ; Disable sounds
               make-backup-files nil                ; Disable backup files
               tab-width 4
               indent-tabs-mode nil                 ; Use spaces instead of tabs
