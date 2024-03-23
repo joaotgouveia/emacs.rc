@@ -15,10 +15,6 @@
 ;; Fonts
 (set-face-attribute 'default nil :font "JetBrains Mono" :height 160)
 
-;; Theme
-;; (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/neo-naga-blue")
-;; (load-theme 'neo-naga-blue t)
-
 ;; Line and column numbers
 (column-number-mode)                 ; Enable column numbers, show up on modeline
 (global-display-line-numbers-mode t) ; Enable line numbers globally
