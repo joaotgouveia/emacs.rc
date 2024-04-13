@@ -1,3 +1,5 @@
+(load "hooks")
+
 ;; minimalistic ui
 (setq-default inhibit-startup-message t            ; disable startup screen
               ring-bell-function 'ignore           ; disable sounds
@@ -133,19 +135,6 @@
         :prefix "SPC"
         :global-prefix "C-SPC"))
 
-;; disable evil keybindings in these modes, C-z to activate
-(defun pluto/evil-hook ()
-    dolist (mode '(custom-mode
-                   eshell-mode
-                   git-rebase-mode
-                   erc-mode
-                   circe-server-mode
-                   circe-chat-mode
-                   circe-query-mode
-                   sauron-mode
-                   term-mode))
-    add-to-list 'evil-emacs-state-modes mode)
-
 ;; evil mode, vim keybinds
 (use-package evil
     :init
@@ -177,13 +166,4 @@
     "C-M-j" 'counsel-switch-buffer)
 
 
-;; making neotree work with evil mode
-(evil-define-key 'normal neotree-mode-map (kbd "TAB") 'neotree-enter)
-(evil-define-key 'normal neotree-mode-map (kbd "SPC") 'neotree-quick-look)
-(evil-define-key 'normal neotree-mode-map (kbd "q") 'neotree-hide)
-(evil-define-key 'normal neotree-mode-map (kbd "RET") 'neotree-enter)
-(evil-define-key 'normal neotree-mode-map (kbd "g") 'neotree-refresh)
-(evil-define-key 'normal neotree-mode-map (kbd "n") 'neotree-next-line)
-(evil-define-key 'normal neotree-mode-map (kbd "p") 'neotree-previous-line)
-(evil-define-key 'normal neotree-mode-map (kbd "A") 'neotree-stretch-toggle)
-(evil-define-key 'normal neotree-mode-map (kbd "H") 'neotree-hidden-file-toggle)
+(add-hook 'neotree-mode-hook 'pluto/neotree-hook)
