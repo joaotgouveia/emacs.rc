@@ -141,7 +141,6 @@
     (setq evil-want-integration t)
     (setq evil-want-keybinding nil)
     (setq evil-want-C-i-jump nil)
-    :hook (evil-mode . pluto/evil-hook)
     :config
     (evil-mode t)
     (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state) ;; use "C-g" instead of ESC to go back to normal mode
