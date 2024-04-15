@@ -188,6 +188,8 @@
   :custom
   (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1))
 
+;; github integration (open prs, see issues, etc.)
+(use-package forge)
 
 ;; key bindings
 (defhydra hydra-text-scale nil
