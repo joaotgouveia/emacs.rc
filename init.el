@@ -48,7 +48,7 @@
 
 ;; neotree
 (use-package neotree)
-(global-set-key [f8] 'neotree-toggle)
+(global-set-key (kbd "C-x f") 'neotree-toggle)
 (setq neo-theme (if (display-graphic-p) 'icons 'classic))
 
 ;; doom themes
