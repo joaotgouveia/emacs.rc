@@ -71,7 +71,7 @@
     :init (doom-modeline-mode t)
     :custom ((doom-modeline-height 15)))
 
-;; rainbow delimiters, match parenthesis
+;; match parenthesis
 (use-package rainbow-delimiters
     :hook (prog-mode . rainbow-delimiters-mode)) ; prog-mode is the base mode for any programming language mode
 
@@ -103,18 +103,18 @@
          ("C-d" . ivy-reverse-i-search-kill))
     :config (ivy-mode t))      ; config happens after the mode is loaded
 
-;; ivy rich, adds extra info when listing commands with ivy
+;; adds extra info when listing commands with ivy
 (use-package ivy-rich
     :init (ivy-rich-mode t))
 
-;; which key, pops up a panel when using a bind, explaining what you can do with it
+;; pops up a panel when using a bind, explaining what you can do with it
 (use-package which-key
     :init (which-key-mode) ; init happens before the package is loaded
     :diminish which-key-mode
     :config
     (setq which-key-idle-delay 0.5))
 
-;; helpful, better help functions
+;; better help functions
 (use-package helpful
     :custom
     (counsel-describe-function-function #'helpful-callable)
@@ -124,18 +124,21 @@
     ([remap describe-command] . helpful-command)
     ([remap describe-function] . counsel-describe-variable))
 
-;; general, define keybinds in a more concise way
+;; define keybinds in a more concise way
 (use-package general
     :config
     (general-evil-setup t)
 
-    ;; Making C-SPC the new leader key
+    ;; making C-SPC the new leader key
     (general-create-definer pluto/leader-keys
         :keymaps '(normal insert visual emacs)
         :prefix "SPC"
-        :global-prefix "C-SPC"))
+        :global-prefix "C-SPC")
 
-;; evil mode, vim keybinds
+    (pluto/leader-keys
+      "t" '(:ignore t :which-key "toggles")))
+
+;; vim keybindings
 (use-package evil
     :init
     (setq evil-want-integration t)
@@ -143,7 +146,7 @@
     (setq evil-want-C-i-jump nil)
     :config
     (evil-mode t)
-    (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state) ;; use "C-g" instead of ESC to go back to normal mode
+    (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state) ;; use C-g instead of ESC to go back to normal mode
 
     ;; when a line wraps
     (evil-global-set-key 'motion "j" 'evil-next-visual-line)
@@ -152,17 +155,26 @@
     (evil-set-initial-state 'messages-buffer-mode 'normal)
     (evil-set-initial-state 'dashboard-mode 'normal))
 
-;; evil collection, evil keybindings for different emacs modes
+;; evil keybindings for different emacs modes
 (use-package evil-collection
     :after evil ;; load this package after evil is loaded, since this depends on it
     :config
     (evil-collection-init))
 
-;; key bindings
+;; temporary bindings for repetitive actions
+(use-package hydra)
 
+;; key bindings
 (general-define-key
     "<escape>" 'keyboard-escape-quit ;; make esc quit prompts
     "C-M-j" 'counsel-switch-buffer)
 
+(defhydra hydra-text-scale nil
+    "zoom"
+    ("j" text-scale-increase "in")
+    ("k" text-scale-decrease "out")
+    ("f" nil "finished" :exit t))
+
+(pluto/leader-keys "tz" '(hydra-text-scale/body :which-key "zoom"))
 
 (add-hook 'neotree-mode-hook 'pluto/neotree-hook)
