@@ -189,9 +189,6 @@
 
 
 ;; key bindings
-(general-define-key
-    "C-M-j" 'counsel-switch-buffer)
-
 (defhydra hydra-text-scale nil
     "zoom"
     ("j" text-scale-increase "in")
