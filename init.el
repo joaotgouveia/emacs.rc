@@ -185,7 +185,8 @@
 
 ;;git integration
 (use-package magit
-  :commands (magit-status magit-get-current-branch)) ; won't load package until one of this commands runs
+  :custom
+  (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1))
 
 
 ;; key bindings
