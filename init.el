@@ -195,6 +195,10 @@
     ("k" text-scale-decrease "out")
     ("f" nil "finished" :exit t))
 
+(evil-define-key '(normal visual) 'global
+  "L" 'evil-end-of-line
+  "H" 'evil-beginning-of-line)
+
 (pluto/leader-keys "tz" '(hydra-text-scale/body :which-key "zoom"))
 
 (add-hook 'neotree-mode-hook 'pluto/neotree-hook)
