@@ -6,13 +6,13 @@
               make-backup-files nil                ; disable backup files
               tab-width 4
               indent-tabs-mode nil                 ; use spaces instead of tabs
-              electric-pair-mode t                 ; auto pairs
               display-line-numbers-type 'relative) ; use relative line numbers
-(scroll-bar-mode -1) ; disable visible scrollbar
-(tool-bar-mode -1)   ; disable the toolbar
-(tooltip-mode -1)    ; disable tooltips
-(menu-bar-mode -1)   ; disable the menu bar
-(set-fringe-mode 15) ; add some horizontal padding
+(scroll-bar-mode -1)   ; disable visible scrollbar
+(tool-bar-mode -1)     ; disable the toolbar
+(tooltip-mode -1)      ; disable tooltips
+(menu-bar-mode -1)     ; disable the menu bar
+(set-fringe-mode 15)   ; add some horizontal padding
+(electric-pair-mode t) ; auto pairs
 
 ;; fonts
 (set-face-attribute 'default nil :font "JetBrains Mono" :height 160)
