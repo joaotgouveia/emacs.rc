@@ -18,7 +18,7 @@
 (set-face-attribute 'default nil :font "JetBrains Mono" :height 160)
 
 ;; line and column numbers
-(column-number-mode)                 ; enable column numbers, show up on modeline
+(column-number-mode)                 ; enable column numbers
 (global-display-line-numbers-mode t) ; enable line numbers globally
 (dolist (mode '(term-mode-hook       ; disable line numbers on some modes
                 shell-mode-hook
@@ -73,7 +73,8 @@
 
 ;; match parenthesis
 (use-package rainbow-delimiters
-  :hook (prog-mode . rainbow-delimiters-mode)) ; prog-mode is the base mode for any programming language mode
+  :hook (prog-mode . rainbow-delimiters-mode))
+  ; prog-mode is the base mode for any programming language mode
 
 ;; counsel
 (use-package counsel
@@ -150,7 +151,8 @@
   (setq evil-undo-system 'undo-fu)
   :config
   (evil-mode t)
-  (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state) ;; use C-g instead of ESC to go back to normal mode
+  (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
+  ;use C-g instead of ESC to go back to normal mode
 
   ;; when a line wraps
   (evil-global-set-key 'motion "j" 'evil-next-visual-line)
@@ -161,7 +163,7 @@
 
 ;; evil keybindings for different emacs modes
 (use-package evil-collection
-  :after evil ;; load this package after evil is loaded, since this depends on it
+  :after evil ;; load this package after evil is loaded
   :config
   (evil-collection-init))
 
@@ -186,7 +188,8 @@
 ;;git integration
 (use-package magit
   :custom
-  (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1))
+  (magit-display-buffer-function
+  #'magit-display-buffer-same-window-except-diff-v1))
 
 ;; github integration (open prs, see issues, etc.)
 (use-package forge)
@@ -204,4 +207,6 @@
 
 (pluto/leader-keys "tz" '(hydra-text-scale/body :which-key "zoom"))
 
+;; hooks
 (add-hook 'neotree-mode-hook 'pluto/neotree-hook)
+(add-hook 'prog-mode-hook 'pluto/whitespaces-hook)
