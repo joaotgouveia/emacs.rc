@@ -6,8 +6,8 @@
               make-backup-files nil                ; disable backup files
               tab-width 4
               indent-tabs-mode nil                 ; use spaces instead of tabs
+              electric-pair-mode t                 ; auto pairs
               display-line-numbers-type 'relative) ; use relative line numbers
-
 (scroll-bar-mode -1) ; disable visible scrollbar
 (tool-bar-mode -1)   ; disable the toolbar
 (tooltip-mode -1)    ; disable tooltips
@@ -35,10 +35,10 @@
 
 (package-initialize)
 (unless package-archive-contents
-    (package-refresh-contents))
+  (package-refresh-contents))
 ;; load use-package
 (unless (package-installed-p 'use-package)
-    (package-install 'use-package)) ; install it if it isn't already installed
+  (package-install 'use-package)) ; install it if it isn't already installed
 (require 'use-package)
 (setq use-package-always-ensure t)
 
@@ -56,8 +56,8 @@
   :ensure t
   :config
   ;; global settings (defaults)
-  (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
-        doom-themes-enable-italic t) ; if nil, italics is universally disabled
+  (setq doom-themes-enable-bold t ; if nil, bold is universally disabled
+    doom-themes-enable-italic t)  ; if nil, italics is universally disabled
   (load-theme 'doom-moonlight t)
 
   ;; enable custom neotree theme
@@ -67,41 +67,41 @@
 
 ;; doom modeline
 (use-package doom-modeline
-    :ensure t
-    :init (doom-modeline-mode t)
-    :custom ((doom-modeline-height 15)))
+  :ensure t
+  :init (doom-modeline-mode t)
+  :custom ((doom-modeline-height 15)))
 
 ;; match parenthesis
 (use-package rainbow-delimiters
-    :hook (prog-mode . rainbow-delimiters-mode)) ; prog-mode is the base mode for any programming language mode
+  :hook (prog-mode . rainbow-delimiters-mode)) ; prog-mode is the base mode for any programming language mode
 
 ;; counsel
 (use-package counsel
-    :bind (("M-x" . counsel-M-x)
-           ("C-x b" . counsel-ibuffer)
-           ("C-x C-f" . counsel-find-file)
-           :map minibuffer-local-map
-           ("C-r" . 'counsel-minibuffer-history))
-    :config (setq ivy-initial-inputs-alist nil)) ; don't start searches with ^
+  :bind (("M-x" . counsel-M-x)
+    ("C-x b" . counsel-ibuffer)
+    ("C-x C-f" . counsel-find-file)
+    :map minibuffer-local-map
+    ("C-r" . 'counsel-minibuffer-history))
+  :config (setq ivy-initial-inputs-alist nil)) ; don't start searches with ^
 
 ;; ivy
 (use-package swiper :ensure t) ; swiper sometimes doesn't come included in ivy
 (use-package ivy
-    :diminish
-    :bind (("C-s" . swiper)
-         :map ivy-minibuffer-map
-         ("TAB" . ivy-alt-done)
-         ("C-l" . ivy-alt-done)
-         ("C-j" . ivy-next-line)
-         ("C-k" . ivy-previous-line)
-         :map ivy-switch-buffer-map
-         ("C-k" . ivy-previous-line)
-         ("C-l" . ivy-done)
-         ("C-d" . ivy-switch-buffer-kill)
-         :map ivy-reverse-i-search-map
-         ("C-k" . ivy-previous-line)
-         ("C-d" . ivy-reverse-i-search-kill))
-    :config (ivy-mode t))      ; config happens after the mode is loaded
+  :diminish
+  :bind (("C-s" . swiper)
+    :map ivy-minibuffer-map
+    ("TAB" . ivy-alt-done)
+    ("C-l" . ivy-alt-done)
+    ("C-j" . ivy-next-line)
+    ("C-k" . ivy-previous-line)
+    :map ivy-switch-buffer-map
+    ("C-k" . ivy-previous-line)
+    ("C-l" . ivy-done)
+    ("C-d" . ivy-switch-buffer-kill)
+    :map ivy-reverse-i-search-map
+    ("C-k" . ivy-previous-line)
+    ("C-d" . ivy-reverse-i-search-kill))
+  :config (ivy-mode t))      ; config happens after the mode is loaded
 
 ;; adds extra info when listing commands with ivy
 (use-package ivy-rich
@@ -109,60 +109,70 @@
 
 ;; pops up a panel when using a bind, explaining what you can do with it
 (use-package which-key
-    :init (which-key-mode) ; init happens before the package is loaded
-    :diminish which-key-mode
-    :config
-    (setq which-key-idle-delay 0.5))
+  :init (which-key-mode) ; init happens before the package is loaded
+  :diminish which-key-mode
+  :config
+  (setq which-key-idle-delay 0.5))
 
 ;; better help functions
 (use-package helpful
-    :custom
-    (counsel-describe-function-function #'helpful-callable)
-    (counsel-describe-variable-function #'helpful-variable)
-    :bind
-    ([remap describe-function] . counsel-describe-function)
-    ([remap describe-command] . helpful-command)
-    ([remap describe-function] . counsel-describe-variable))
+  :custom
+  (counsel-describe-function-function #'helpful-callable)
+  (counsel-describe-variable-function #'helpful-variable)
+  :bind
+  ([remap describe-function] . counsel-describe-function)
+  ([remap describe-command] . helpful-command)
+  ([remap describe-function] . counsel-describe-variable))
 
 ;; define keybinds in a more concise way
 (use-package general
-    :config
-    (general-evil-setup t)
+  :config
+  (general-evil-setup t)
 
-    ;; making C-SPC the new leader key
-    (general-create-definer pluto/leader-keys
-        :keymaps '(normal insert visual emacs)
-        :prefix "SPC"
-        :global-prefix "C-SPC")
+  ;; making C-SPC the new leader key
+  (general-create-definer pluto/leader-keys
+    :keymaps '(normal insert visual emacs)
+    :prefix "SPC"
+    :global-prefix "C-SPC")
 
-    (pluto/leader-keys
-      "t" '(:ignore t :which-key "toggles")))
+  (pluto/leader-keys
+    "t" '(:ignore t :which-key "toggles")))
 
 ;; vim keybindings
 (use-package evil
-    :init
-    (setq evil-want-integration t)
-    (setq evil-want-keybinding nil)
-    (setq evil-want-C-i-jump nil)
-    :config
-    (evil-mode t)
-    (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state) ;; use C-g instead of ESC to go back to normal mode
+  :init
+  (setq evil-want-integration t)
+  (setq evil-want-keybinding nil)
+  (setq evil-want-C-i-jump nil)
+  :config
+  (evil-mode t)
+  (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state) ;; use C-g instead of ESC to go back to normal mode
 
-    ;; when a line wraps
-    (evil-global-set-key 'motion "j" 'evil-next-visual-line)
-    (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
+  ;; when a line wraps
+  (evil-global-set-key 'motion "j" 'evil-next-visual-line)
+  (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
 
-    (evil-set-initial-state 'messages-buffer-mode 'normal)
-    (evil-set-initial-state 'dashboard-mode 'normal))
+  (evil-set-initial-state 'messages-buffer-mode 'normal)
+  (evil-set-initial-state 'dashboard-mode 'normal))
 
 ;; evil keybindings for different emacs modes
 (use-package evil-collection
-    :after evil ;; load this package after evil is loaded, since this depends on it
-    :config
-    (evil-collection-init))
+  :after evil ;; load this package after evil is loaded, since this depends on it
+  :config
+  (evil-collection-init))
 
 ;; temporary bindings for repetitive actions
 (use-package hydra)
+
+;; managing projects
+(use-package projectile
+  :diminish projectile-mode
+  :config (projectile-mode)
+  :bind-keymap
+  ("C-c p" . projectile-command-map)
+  :init
+  (when (file-directory-p "~/dev"))
+    (setq projectile-project-search-path '("~/dev")))
 
 ;; key bindings
 (general-define-key
