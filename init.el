@@ -138,12 +138,16 @@
   (pluto/leader-keys
     "t" '(:ignore t :which-key "toggles")))
 
+;; better undo and redo
+(use-package undo-fu)
+
 ;; vim keybindings
 (use-package evil
   :init
   (setq evil-want-integration t)
   (setq evil-want-keybinding nil)
   (setq evil-want-C-i-jump nil)
+  (setq evil-undo-system 'undo-fu)
   :config
   (evil-mode t)
   (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state) ;; use C-g instead of ESC to go back to normal mode
@@ -168,15 +172,24 @@
 (use-package projectile
   :diminish projectile-mode
   :config (projectile-mode)
+  :custom ((projectile-completion-system 'ivy))
   :bind-keymap
   ("C-c p" . projectile-command-map)
   :init
   (when (file-directory-p "~/dev"))
     (setq projectile-project-search-path '("~/dev")))
 
+;; improve projectile and ivy integration
+(use-package counsel-projectile
+  :config (counsel-projectile-mode))
+
+;;git integration
+(use-package magit
+  :commands (magit-status magit-get-current-branch)) ; won't load package until one of this commands runs
+
+
 ;; key bindings
 (general-define-key
-    "<escape>" 'keyboard-escape-quit ;; make esc quit prompts
     "C-M-j" 'counsel-switch-buffer)
 
 (defhydra hydra-text-scale nil
