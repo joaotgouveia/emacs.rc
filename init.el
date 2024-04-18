@@ -199,6 +199,25 @@
 ;; github integration (open prs, see issues, etc.)
 (use-package forge)
 
+;; shows where we are in a project
+(use-package breadcrumb
+  :hook (prog-mode . breadcrumb-mode))
+
+;; better completions (TODO: kinda slow when active)
+(use-package company)
+
+;; makes company look better
+(use-package company-box
+  :hook (company-mode . company-box-mode))
+
+;; comments
+(use-package evil-nerd-commenter
+  :bind ("C-," . evilnc-comment-or-uncomment-lines))
+
+;; better js mode
+(use-package js2-mode)
+(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+
 ;; key bindings
 (defhydra hydra-text-scale nil
     "zoom"
@@ -214,7 +233,6 @@
 
 (evil-define-key 'normal eglot-mode-map
   (kbd "C-.") 'xref-find-definitions
-  (kbd "C-,") 'xref-go-back
   (kbd "C-?") 'xref-find-references)
 
 ;; hooks
