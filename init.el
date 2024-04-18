@@ -14,6 +14,10 @@
 (set-fringe-mode 15)   ; add some horizontal padding
 (electric-pair-mode t) ; auto pairs
 
+;; changing to tree sitter modes
+;;(setq major-mode-remap-alist
+;;     '((javascript-mode . js-ts-mode)))
+
 ;; fonts
 (set-face-attribute 'default nil :font "JetBrains Mono" :height 160)
 
@@ -201,11 +205,15 @@
     ("k" text-scale-decrease "out")
     ("f" nil "finished" :exit t))
 
+(pluto/leader-keys "tz" '(hydra-text-scale/body :which-key "zoom"))
+
 (evil-define-key '(normal visual) 'global
   "L" 'evil-end-of-line
   "H" 'evil-beginning-of-line)
 
-(pluto/leader-keys "tz" '(hydra-text-scale/body :which-key "zoom"))
+(evil-define-key 'normal eglot-mode-map
+  (kbd "C-.") 'xref-find-definitions
+  (kbd "C-,") 'xref-go-back)
 
 ;; hooks
 (add-hook 'neotree-mode-hook 'pluto/neotree-hook)
