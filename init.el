@@ -26,8 +26,9 @@
 (global-display-line-numbers-mode t) ; enable line numbers globally
 (dolist (mode '(term-mode-hook       ; disable line numbers on some modes
                 shell-mode-hook
-                eshell-mode-hook))
-        (add-hook mode (lambda () (display-line-numbers-mode nil))))
+                eshell-mode-hook
+                neotree-mode-hook))
+        (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
 ;; packages
 ;; initialize package sources
