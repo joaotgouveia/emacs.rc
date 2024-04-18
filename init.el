@@ -213,7 +213,8 @@
 
 (evil-define-key 'normal eglot-mode-map
   (kbd "C-.") 'xref-find-definitions
-  (kbd "C-,") 'xref-go-back)
+  (kbd "C-,") 'xref-go-back
+  (kbd "C-?") 'xref-find-references)
 
 ;; hooks
 (add-hook 'neotree-mode-hook 'pluto/neotree-hook)
