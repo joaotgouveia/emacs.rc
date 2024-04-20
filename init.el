@@ -27,14 +27,14 @@
 (dolist (mode '(term-mode-hook       ; disable line numbers on some modes
                 shell-mode-hook
                 eshell-mode-hook
-                neotree-mode-hook))
+                neotree-mode-hook
+                org-mode-hook))
         (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
 ;; packages
 ;; initialize package sources
 (require 'package)
 (setq package-archives '(("melpa" . "https://melpa.org/packages/")
-                         ("melpa-stable" . "https://stable.melpa.org/packages/")
                          ("org" . "https://orgmode.org/elpa/")
                          ("elpa" . "https://elpa.gnu.org/packages/")))
 
@@ -200,8 +200,7 @@
 (use-package forge)
 
 ;; shows where we are in a project
-(use-package breadcrumb
-  :hook (prog-mode . breadcrumb-mode))
+(use-package breadcrumb)
 
 ;; better completions (TODO: kinda slow when active)
 (use-package company)
@@ -214,9 +213,17 @@
 (use-package evil-nerd-commenter
   :bind ("C-," . evilnc-comment-or-uncomment-lines))
 
-;; better js mode
-(use-package js2-mode)
-(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+;; org mode
+(use-package org)
+
+;; code block functionality in org mode files
+(org-babel-do-load-languages 'org-babel-load-languages
+  '((emacs-lisp . t)))
+(setq org-confirm-babel-evaluate nil)
+
+;; org templates
+(require 'org-tempo)
+(add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
 
 ;; key bindings
 (defhydra hydra-text-scale nil
@@ -230,6 +237,10 @@
 (evil-define-key '(normal visual) 'global
   "L" 'evil-end-of-line
   "H" 'evil-beginning-of-line)
+
+(evil-define-key '(normal insert) 'global
+  (kbd "C-x h") 'previous-buffer
+  (kbd "C-x l") 'next-buffer)
 
 (evil-define-key 'normal eglot-mode-map
   (kbd "C-.") 'xref-find-definitions
