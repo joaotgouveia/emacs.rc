@@ -1,0 +1,398 @@
+#+title pluto emacs configuration
+#+PROPERTY header-args:emacs-lisp :tangle ./test.el
+
+* Base setup
+** Hooks
+
+#+begin_src emacs-lisp
+(load "hooks")
+#+end_src
+
+** Packages
+
+#+begin_src emacs-lisp
+;; initialize package sources
+(require 'package)
+(setq package-archives '(("melpa" . "https://melpa.org/packages/")
+                         ("org" . "https://orgmode.org/elpa/")
+                         ("elpa" . "https://elpa.gnu.org/packages/")))
+
+(package-initialize)
+(unless package-archive-contents
+  (package-refresh-contents))
+;; load use-package
+(unless (package-installed-p 'use-package)
+  (package-install 'use-package)) ; install it if it isn't already installed
+(require 'use-package)
+(setq use-package-always-ensure t)
+#+end_src
+
+* Appearence
+** Base UI
+
+#+begin_src emacs-lisp
+;; minimalistic ui
+(setq-default inhibit-startup-message t            ; disable startup screen
+              ring-bell-function 'ignore           ; disable sounds
+              make-backup-files nil                ; disable backup files
+              tab-width 4
+              indent-tabs-mode nil                 ; use spaces instead of tabs
+              display-line-numbers-type 'relative) ; use relative line numbers
+(scroll-bar-mode -1)   ; disable visible scrollbar
+(tool-bar-mode -1)     ; disable the toolbar
+(tooltip-mode -1)      ; disable tooltips
+(menu-bar-mode -1)     ; disable the menu bar
+(set-fringe-mode 15)   ; add some horizontal padding
+
+;; line and column numbers
+(column-number-mode)                 ; enable column numbers
+(global-display-line-numbers-mode t) ; enable line numbers globally
+(dolist (mode '(term-mode-hook       ; disable line numbers on some modes
+                shell-mode-hook
+                eshell-mode-hook
+                neotree-mode-hook
+                org-mode-hook))
+        (add-hook mode (lambda () (display-line-numbers-mode 0))))
+#+end_src
+
+** Font
+
+#+begin_src emacs-lisp
+(set-face-attribute 'default nil :font "JetBrains Mono" :height 160)
+#+end_src
+
+** Auto pairing
+
+NOTE: remove for org mode (?)
+
+#+begin_src emacs-lisp
+(electric-pair-mode t)
+#+end_src
+
+** all-the-icons
+
+#+begin_src emacs-lisp
+(use-package all-the-icons
+  :if (display-graphic-p))
+#+end_src
+
+** Theme
+
+#+begin_src emacs-lisp
+(use-package doom-themes
+  :ensure t
+  :config
+  ;; global settings (defaults)
+  (setq doom-themes-enable-bold t ; if nil, bold is universally disabled
+    doom-themes-enable-italic t)  ; if nil, italics is universally disabled
+  (load-theme 'doom-moonlight t)
+
+  ;; enable custom neotree theme
+  (doom-themes-neotree-config)
+  ;; corrects (and improves) org-mode's native fontification.
+  (doom-themes-org-config))
+#+end_src
+
+** Modeline
+
+#+begin_src emacs-lisp
+(use-package doom-modeline
+  :ensure t
+  :init (doom-modeline-mode t)
+  :custom ((doom-modeline-height 15)))
+#+end_src
+
+** neotree
+
+#+begin_src emacs-lisp
+(use-package neotree)
+(global-set-key (kbd "C-x f") 'neotree-toggle)
+(setq neo-theme (if (display-graphic-p) 'icons 'classic))
+(add-hook 'neotree-mode-hook 'pluto/neotree-hook)
+#+end_src
+
+** rainbow-delimiters
+
+#+begin_src emacs-lisp
+;; match parenthesis
+(use-package rainbow-delimiters
+  :hook (prog-mode . rainbow-delimiters-mode))
+  ;; prog-mode is the base mode for any programming language mode
+#+end_src
+
+* General
+** counsel
+
+#+begin_src emacs-lisp
+(use-package counsel
+  :bind (("M-x" . counsel-M-x)
+    ("C-x b" . counsel-ibuffer)
+    ("C-x C-f" . counsel-find-file)
+    :map minibuffer-local-map
+    ("C-r" . 'counsel-minibuffer-history)))
+#+end_src
+
+** ivy
+
+#+begin_src emacs-lisp
+(use-package swiper :ensure t) ;; swiper sometimes doesn't come included in ivy
+(use-package ivy
+  :diminish
+  :bind (("C-s" . swiper)
+    :map ivy-minibuffer-map
+    ("TAB" . ivy-alt-done)
+    ("C-l" . ivy-alt-done)
+    ("C-j" . ivy-next-line)
+    ("C-k" . ivy-previous-line)
+    :map ivy-switch-buffer-map
+    ("C-k" . ivy-previous-line)
+    ("C-l" . ivy-done)
+    ("C-d" . ivy-switch-buffer-kill)
+    :map ivy-reverse-i-search-map
+    ("C-k" . ivy-previous-line)
+    ("C-d" . ivy-reverse-i-search-kill))
+  :config (ivy-mode t))      ;; config happens after the mode is loaded
+#+end_src
+
+** ivy-rich
+
+Adds extra info when listing commands with Ivy
+
+#+begin_src emacs-lisp
+(use-package ivy-rich
+    :init (ivy-rich-mode t))
+#+end_src
+
+** which-key
+
+Pops up a panel when using a bind, explaining what you can do with it
+
+#+begin_src emacs-lisp
+(use-package which-key
+  :init (which-key-mode) ; init happens before the package is loaded
+  :diminish which-key-mode
+  :config
+  (setq which-key-idle-delay 0.5))
+#+end_src
+
+** heplful
+
+Better help functions
+
+#+begin_src emacs-lisp
+(use-package helpful
+  :custom
+  (counsel-describe-function-function #'helpful-callable)
+  (counsel-describe-variable-function #'helpful-variable)
+  :bind
+  ([remap describe-function] . counsel-describe-function)
+  ([remap describe-command] . helpful-command)
+  ([remap describe-function] . counsel-describe-variable))
+#+end_src
+
+** general
+
+Define keybinds in a more concise way
+
+#+begin_src emacs-lisp
+(use-package general
+  :config
+  (general-evil-setup t)
+
+  ;; making C-SPC the new leader key
+  (general-create-definer pluto/leader-keys
+    :keymaps '(normal insert visual emacs)
+    :prefix "SPC"
+    :global-prefix "C-SPC")
+
+  (pluto/leader-keys
+    "t" '(:ignore t :which-key "toggles")))
+#+end_src
+
+** undo-fu
+
+Better undo and redo
+
+#+begin_src emacs-lisp
+(use-package undo-fu)
+#+end_src
+
+** hydra
+
+Temporary bindings for repetitive actions
+
+#+begin_src emacs-lisp
+(use-package hydra)
+#+end_src
+
+** evil
+
+Vim keybindings
+
+#+begin_src emacs-lisp
+(use-package evil
+  :init
+  (setq evil-want-integration t)
+  (setq evil-want-keybinding nil)
+  (setq evil-want-C-i-jump nil)
+  (setq evil-undo-system 'undo-fu)
+  :config
+  (evil-mode t)
+  ;; use C-g instead of ESC to go back to normal mode
+  (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
+
+  ;; when a line wraps
+  (evil-global-set-key 'motion "j" 'evil-next-visual-line)
+  (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
+
+  (evil-set-initial-state 'messages-buffer-mode 'normal)
+  (evil-set-initial-state 'dashboard-mode 'normal))
+#+end_src
+
+** evil-collection
+
+Evil keybindings for different emacs modes
+
+#+begin_src emacs-lisp
+(use-package evil-collection
+  :after evil ;; load this package after evil is loaded
+  :config
+  (evil-collection-init))
+#+end_src
+
+** Keybindings
+
+#+begin_src emacs-lisp
+(defhydra hydra-text-scale nil
+    "zoom"
+    ("j" text-scale-increase "in")
+    ("k" text-scale-decrease "out")
+    ("f" nil "finished" :exit t))
+
+(pluto/leader-keys "tz" '(hydra-text-scale/body :which-key "zoom"))
+
+(evil-define-key '(normal visual) 'global
+  "L" 'evil-end-of-line
+  "H" 'evil-beginning-of-line)
+
+(evil-define-key '(normal insert) 'global
+  (kbd "C-x h") 'previous-buffer
+  (kbd "C-x l") 'next-buffer)
+
+(evil-define-key 'normal eglot-mode-map
+  (kbd "C-.") 'xref-find-definitions
+  (kbd "C-?") 'xref-find-references)
+#+end_src
+
+* Dev
+** Whitespace handling
+
+#+begin_src emacs-lisp
+(add-hook 'prog-mode-hook 'pluto/whitespaces-hook)
+#+end_src
+
+** evil-nerd-commenter
+
+#+begin_src emacs-lisp
+(use-package evil-nerd-commenter
+  :bind ("C-," . evilnc-comment-or-uncomment-lines))
+#+end_src
+** projectile
+
+Managing projects
+
+#+begin_src emacs-lisp
+(use-package projectile
+  :diminish projectile-mode
+  :config (projectile-mode)
+  :custom ((projectile-completion-system 'ivy))
+  :bind-keymap
+  ("C-c p" . projectile-command-map)
+  :init
+  (when (file-directory-p "~/dev"))
+    (setq projectile-project-search-path '("~/dev")))
+#+end_src
+
+** counsel-projectile
+
+Improve projectile and ivy integration
+
+#+begin_src emacs-lisp
+(use-package counsel-projectile
+  :config (counsel-projectile-mode))
+#+end_src
+
+** magit
+
+Git integration
+
+#+begin_src emacs-lisp
+(use-package magit
+  :custom
+  (magit-display-buffer-function
+  #'magit-display-buffer-same-window-except-diff-v1))
+#+end_src
+
+** forge
+
+GitHub integration (open prs, see issues, etc.)
+
+#+begin_src emacs-lisp
+(use-package forge)
+#+end_src
+
+** breadcrumb
+
+Shows where we are in a project
+
+#+begin_src emacs-lisp
+(use-package breadcrumb)
+#+end_src
+
+** company
+
+Better completions
+NOTE: kinda slow when active
+
+#+begin_src emacs-lisp
+(use-package company)
+#+end_src
+
+** company-box
+
+Makes company look better
+
+#+begin_src emacs-lisp
+(use-package company-box
+  :hook (company-mode . company-box-mode))
+#+end_src
+
+* Org mode
+
+#+begin_src emacs-lisp
+(use-package org)
+#+end_src
+
+** Whitespace handling
+
+#+begin_src emacs-lisp
+(add-hook 'org-mode-hook 'pluto/whitespaces-hook)
+#+end_src
+
+** Babel
+
+Code block functionality
+
+#+begin_src emacs-lisp
+(org-babel-do-load-languages 'org-babel-load-languages
+  '((emacs-lisp . t)))
+(setq org-confirm-babel-evaluate nil)
+#+end_src
+
+** Templates
+
+#+begin_src emacs-lisp
+(require 'org-tempo)
+(add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
+#+end_src
+
