@@ -1,5 +1,5 @@
-#+title pluto emacs configuration
-#+PROPERTY header-args:emacs-lisp :tangle ./test.el
+#+title: pluto emacs configuration
+#+PROPERTY: header-args:emacs-lisp :tangle ./test.el
 
 * Base setup
 ** Hooks
