@@ -27,6 +27,7 @@
 (setq use-package-always-ensure t)
 #+end_src
 
+
 * Appearence
 ** Base UI
 
@@ -119,6 +120,7 @@ NOTE: remove for org mode (?)
   :hook (prog-mode . rainbow-delimiters-mode))
   ;; prog-mode is the base mode for any programming language mode
 #+end_src
+
 
 * General
 ** counsel
@@ -279,10 +281,11 @@ Evil keybindings for different emacs modes
   (kbd "C-x h") 'previous-buffer
   (kbd "C-x l") 'next-buffer)
 
-(evil-define-key 'normal eglot-mode-map
-  (kbd "C-.") 'xref-find-definitions
-  (kbd "C-?") 'xref-find-references)
+(evil-define-key 'normal lsp-mode-map
+  (kbd "C-.") 'lsp-find-definition
+  (kbd "C-?") 'lsp-find-references)
 #+end_src
+
 
 * Dev
 ** Whitespace handling
@@ -366,6 +369,55 @@ Makes company look better
 (use-package company-box
   :hook (company-mode . company-box-mode))
 #+end_src
+
+** lsp-mode
+
+LSP support
+
+#+begin_src emacs-lisp
+(use-package lsp-mode
+  :init
+  (setq lsp-keymap-prefix "C-c l")
+  :hook ((python-mode . lsp-deferred)
+         (javascript-mode . lsp-deferred)
+         (c-mode . lsp-deferred)
+         (rust-mode . lsp-deferred)
+         (lsp-mode . lsp-enable-which-key-integration))
+  :commands (lsp lsp-deferred))
+#+end_src
+
+** lsp-ui
+
+Higher level UI modules (flycheck support, code lenses, etc.)
+
+#+begin_src emacs-lisp
+(use-package lsp-ui :commands lsp-ui-mode)
+#+end_src
+
+** lsp-ivy
+
+Ivy interface to the workspace symbol functionality of lsp-mode
+
+#+begin_src emacs-lisp
+(use-package lsp-ivy :commands lsp-ivy-workspace-symbol)
+#+end_src
+
+** lsp-treemacs
+
+Treemacs integration
+
+#+begin_src emacs-lisp
+(use-package lsp-treemacs :commands lsp-treemacs-errors-list)
+#+end_src
+
+** dap-mode
+
+Debugger
+
+#+begin_src emacs-lisp
+(use-package dap-mode)
+#+end_src
+
 
 * Org mode
 
