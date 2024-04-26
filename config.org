@@ -319,6 +319,15 @@ Evil keybindings for different emacs modes
 (add-hook 'prog-mode-hook 'jg/whitespaces-hook)
 #+end_src
 
+** Tree-sitter
+
+NOTE: Currently crashing
+
+#+begin_src emacs-lisp
+;;(setq major-mode-remap-alist
+;; '((javascript-mode . js-ts-mode)))
+#+end_src
+
 ** evil-nerd-commenter
 
 #+begin_src emacs-lisp
