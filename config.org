@@ -125,6 +125,20 @@ NOTE: remove for org mode (?)
 
 
 * General
+** auto-package-update
+
+Automatically update packages
+
+#+begin_src emacs-lisp
+(use-package auto-package-update
+  :custom
+  (auto-package-update-interval 7)
+  (auto-package-update-prompt-before-update t)
+  (auto-package-update-hide-results t)
+  :config
+  (auto-package-update-maybe))
+#+end_src
+
 ** counsel
 
 #+begin_src emacs-lisp
@@ -302,6 +316,7 @@ Evil keybindings for different emacs modes
 (use-package evil-nerd-commenter
   :bind ("C-," . evilnc-comment-or-uncomment-lines))
 #+end_src
+
 ** projectile
 
 Managing projects
@@ -447,7 +462,7 @@ Debugger
 
 (use-package org
   :config
-  (setq org-ellipsis " ↴"
+  (setq org-ellipsis " ▼"
         org-hide-emphasis-markers t))
 
 (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'jg/org-tangle-hook)))
@@ -503,6 +518,8 @@ Allows customization of bullets (*)
 #+end_src
 
 ** visual-fill-mode
+
+Center text on screen
 
 #+begin_src emacs-lisp
     (use-package visual-fill-column
