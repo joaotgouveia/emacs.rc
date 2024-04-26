@@ -1,4 +1,4 @@
-#+title: pluto emacs configuration
+#+title: Emacs configuration
 #+PROPERTY: header-args:emacs-lisp :tangle ./test.el
 
 * Base setup
@@ -109,7 +109,7 @@ NOTE: remove for org mode (?)
 (use-package neotree)
 (global-set-key (kbd "C-x f") 'neotree-toggle)
 (setq neo-theme (if (display-graphic-p) 'icons 'classic))
-(add-hook 'neotree-mode-hook 'pluto/neotree-hook)
+(add-hook 'neotree-mode-hook 'jg/neotree-hook)
 #+end_src
 
 ** rainbow-delimiters
@@ -202,12 +202,12 @@ Define keybinds in a more concise way
   (general-evil-setup t)
 
   ;; making C-SPC the new leader key
-  (general-create-definer pluto/leader-keys
+  (general-create-definer jg/leader-keys
     :keymaps '(normal insert visual emacs)
     :prefix "SPC"
     :global-prefix "C-SPC")
 
-  (pluto/leader-keys
+  (jg/leader-keys
     "t" '(:ignore t :which-key "toggles")))
 #+end_src
 
@@ -271,7 +271,7 @@ Evil keybindings for different emacs modes
     ("k" text-scale-decrease "out")
     ("f" nil "finished" :exit t))
 
-(pluto/leader-keys "tz" '(hydra-text-scale/body :which-key "zoom"))
+(jg/leader-keys "tz" '(hydra-text-scale/body :which-key "zoom"))
 
 (evil-define-key '(normal visual) 'global
   "L" 'evil-end-of-line
@@ -291,7 +291,7 @@ Evil keybindings for different emacs modes
 ** Whitespace handling
 
 #+begin_src emacs-lisp
-(add-hook 'prog-mode-hook 'pluto/whitespaces-hook)
+(add-hook 'prog-mode-hook 'jg/whitespaces-hook)
 #+end_src
 
 ** evil-nerd-commenter
@@ -428,7 +428,7 @@ Debugger
 ** Whitespace handling
 
 #+begin_src emacs-lisp
-(add-hook 'org-mode-hook 'pluto/whitespaces-hook)
+(add-hook 'org-mode-hook 'jg/whitespaces-hook)
 #+end_src
 
 ** Babel

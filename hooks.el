@@ -1,5 +1,5 @@
 ;; disable evil keybindings in these modes, C-z to activate
-(defun pluto/evil-hook ()
+(defun jg/evil-hook ()
     (dolist (mode '(custom-mode
                    eshell-mode
                    git-rebase-mode
@@ -12,7 +12,7 @@
     (add-to-list 'evil-emacs-state-modes mode)))
 
 ;; making neotree work with evil mode
-(defun pluto/neotree-hook ()
+(defun jg/neotree-hook ()
   (define-key evil-normal-state-local-map (kbd "TAB") 'neotree-enter)
   (define-key evil-normal-state-local-map (kbd "SPC") 'neotree-quick-look)
   (define-key evil-normal-state-local-map (kbd "q") 'neotree-hide)
@@ -24,7 +24,7 @@
   (define-key evil-normal-state-local-map (kbd "A") 'neotree-stretch-toggle))
 
 ;; whitespace handling (strongly inspired by tsoding's config)
-(defun pluto/whitespaces-hook ()
+(defun jg/whitespaces-hook ()
   (whitespace-mode t)
   (setq whitespace-style '(face
     trailing         ; trailing whitespaces
