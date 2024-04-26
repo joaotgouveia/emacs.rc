@@ -1,5 +1,5 @@
 #+title: Emacs configuration
-#+PROPERTY: header-args:emacs-lisp :tangle ./test.el
+#+PROPERTY: header-args:emacs-lisp :tangle ./init.el
 
 * Base setup
 ** Hooks
@@ -60,6 +60,8 @@
 
 #+begin_src emacs-lisp
 (set-face-attribute 'default nil :font "JetBrains Mono" :height 160)
+(set-face-attribute 'fixed-pitch nil :font "JetBrains Mono" :height 160)
+(set-face-attribute 'variable-pitch nil :font "Helvetica" :height 160)
 #+end_src
 
 ** Auto pairing
@@ -422,7 +424,33 @@ Debugger
 * Org mode
 
 #+begin_src emacs-lisp
-(use-package org)
+;; org mode font settings (strongly inspired by SystemCrafter's config)
+(defun jg/org-font-setup()
+  (dolist (face '((org-level-1 . 1.2)
+                  (org-level-2 . 1.1)
+                  (org-level-3 . 1.05)))
+  set-face-attribute (car face) nil :font "Helvetica" :weight 'regular :height (cdr face))
+
+  ;; Use • in lists instead of -
+  (font-lock-add-keywords 'org-mode
+                          '(("^ *\\([-]\\) "
+                              (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
+
+  ;; Ensure that anything that should be fixed-pitch in Org files appears that way
+  (set-face-attribute 'org-block nil :foreground nil :inherit 'fixed-pitch)
+  (set-face-attribute 'org-code nil   :inherit '(shadow fixed-pitch))
+  (set-face-attribute 'org-table nil   :inherit '(shadow fixed-pitch))
+  (set-face-attribute 'org-verbatim nil :inherit '(shadow fixed-pitch))
+  (set-face-attribute 'org-special-keyword nil :inherit '(font-lock-comment-face fixed-pitch))
+  (set-face-attribute 'org-meta-line nil :inherit '(font-lock-comment-face fixed-pitch))
+  (set-face-attribute 'org-checkbox nil :inherit 'fixed-pitch))
+
+(use-package org
+  :config
+  (setq org-ellipsis " ↴"
+        org-hide-emphasis-markers t))
+
+(add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'jg/org-tangle-hook)))
 #+end_src
 
 ** Whitespace handling
@@ -460,4 +488,16 @@ Code block functionality
          ("C-c n i" . org-roam-node-insert))
   :config
   (org-roam-setup))
+#+end_src
+
+** org-bullets
+
+Allows customization of bullets (*)
+
+#+begin_src emacs-lisp
+(use-package org-bullets
+  :after org
+  :hook (org-mode . org-bullets-mode)
+  :custom
+  (org-bullets-bullet-list '("◉" "●" "○")))
 #+end_src
