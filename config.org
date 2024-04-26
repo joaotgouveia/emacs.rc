@@ -456,7 +456,7 @@ Debugger
 ** Whitespace handling
 
 #+begin_src emacs-lisp
-(add-hook 'org-mode-hook 'jg/whitespaces-hook)
+(add-hook 'org-mode-hook 'jg/org-whitespaces-hook)
 #+end_src
 
 ** Babel
@@ -500,4 +500,12 @@ Allows customization of bullets (*)
   :hook (org-mode . org-bullets-mode)
   :custom
   (org-bullets-bullet-list '("◉" "●" "○")))
+#+end_src
+
+** visual-fill-mode
+
+#+begin_src emacs-lisp
+    (use-package visual-fill-column
+      :defer t
+      :hook (org-mode . jg/org-visual-fill-hook))
 #+end_src
