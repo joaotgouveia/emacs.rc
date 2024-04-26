@@ -20,11 +20,13 @@
 (package-initialize)
 (unless package-archive-contents
   (package-refresh-contents))
+
 ;; load use-package
 (unless (package-installed-p 'use-package)
-  (package-install 'use-package)) ; install it if it isn't already installed
-(require 'use-package)
-(setq use-package-always-ensure t)
+;; install it if it isn't already installed
+   (package-install 'use-package))
+ (require 'use-package)
+ (setq use-package-always-ensure t)
 #+end_src
 
 
@@ -156,7 +158,10 @@ Automatically update packages
     ("C-x b" . counsel-ibuffer)
     ("C-x C-f" . counsel-find-file)
     :map minibuffer-local-map
-    ("C-r" . 'counsel-minibuffer-history)))
+    ("C-r" . 'counsel-minibuffer-history))
+  :config
+  ;; don't start searches with ^
+  (setq ivy-initial-inputs-alist nil))
 #+end_src
 
 ** ivy
