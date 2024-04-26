@@ -59,9 +59,18 @@
 ** Font
 
 #+begin_src emacs-lisp
-(set-face-attribute 'default nil :font "JetBrains Mono" :height 160)
-(set-face-attribute 'fixed-pitch nil :font "JetBrains Mono" :height 160)
-(set-face-attribute 'variable-pitch nil :font "Helvetica" :height 160)
+(defun jg/set-font-faces ()
+  (set-face-attribute 'default nil :font "JetBrains Mono" :height 160)
+  (set-face-attribute 'fixed-pitch nil :font "JetBrains Mono" :height 160)
+  (set-face-attribute 'variable-pitch nil :font "Source Sans Pro" :height 160))
+
+(if (daemonp)
+  (add-hook 'after-make-frame-functions
+            (lambda (frame)
+            (setq doom-modeline-icon t)
+              (with-selected-frame frame
+                (jg/set-font-faces))))
+  (jg/set-font-faces))
 #+end_src
 
 ** Auto pairing
@@ -443,8 +452,12 @@ Debugger
 (defun jg/org-font-setup()
   (dolist (face '((org-level-1 . 1.2)
                   (org-level-2 . 1.1)
-                  (org-level-3 . 1.05)))
-  set-face-attribute (car face) nil :font "Helvetica" :weight 'regular :height (cdr face))
+                  (org-level-3 . 1.05)
+                  (org-level-4 . 1.0)
+                  (org-level-5 . 1.1)
+                  (org-level-6 . 1.1)
+                  (org-level-7 . 1.1)))
+  (set-face-attribute (car face) nil :font "Source Sans Pro" :weight 'regular :height (cdr face)))
 
   ;; Use • in lists instead of -
   (font-lock-add-keywords 'org-mode
@@ -463,7 +476,8 @@ Debugger
 (use-package org
   :config
   (setq org-ellipsis " ▼"
-        org-hide-emphasis-markers t))
+        org-hide-emphasis-markers t)
+  (jg/org-font-setup))
 
 (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'jg/org-tangle-hook)))
 #+end_src
