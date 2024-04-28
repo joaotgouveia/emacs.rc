@@ -28,7 +28,7 @@
   (whitespace-mode t)
   (setq whitespace-style '(face
     trailing         ; trailing whitespaces
-    lines            ; long lines (> 80)
+   ;lines            ; long lines (> 80)
     empty            ; empty lines at the beginning or end
     space-before-tab
     space-after-tab

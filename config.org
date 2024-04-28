@@ -292,16 +292,24 @@ Evil keybindings for different emacs modes
   (evil-collection-init))
 #+end_src
 
+** multiple-cursors
+
+NOTE: Not used atm
+
+#+begin_src emacs-lisp
+(use-package multiple-cursors)
+#+end_src
+
 ** Keybindings
 
 #+begin_src emacs-lisp
-(defhydra hydra-text-scale nil
-    "zoom"
-    ("j" text-scale-increase "in")
-    ("k" text-scale-decrease "out")
-    ("f" nil "finished" :exit t))
+(defhydra hydra-zoom nil
+  "zoom"
+  ("j" text-scale-increase "in")
+  ("k" text-scale-decrease "out")
+  ("f" nil "finished" :exit t))
 
-(jg/leader-keys "tz" '(hydra-text-scale/body :which-key "zoom"))
+(jg/leader-keys "tz" '(hydra-zoom/body :which-key "zoom"))
 
 (evil-define-key '(normal visual) 'global
   "L" 'evil-end-of-line
@@ -310,6 +318,13 @@ Evil keybindings for different emacs modes
 (evil-define-key '(normal insert) 'global
   (kbd "C-x h") 'previous-buffer
   (kbd "C-x l") 'next-buffer)
+
+;;(defun jg/visual-insert ()
+;; (interactive)
+;; (mc/edit-lines))
+
+;;(evil-define-key 'visual 'global
+;;  (kbd "a") 'jg/visual-insert)
 
 (evil-define-key 'normal lsp-mode-map
   (kbd "C-.") 'lsp-find-definition
@@ -463,7 +478,7 @@ Debugger
 
 #+begin_src emacs-lisp
 ;; org mode font settings (strongly inspired by SystemCrafter's config)
-(defun jg/org-font-setup()
+(defun jg/org-font-setup ()
   (dolist (face '((org-level-1 . 1.2)
                   (org-level-2 . 1.1)
                   (org-level-3 . 1.05)
@@ -475,8 +490,8 @@ Debugger
 
   ;; Use • in lists instead of -
   (font-lock-add-keywords 'org-mode
-                          '(("^ *\\([-]\\) "
-                              (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
+   '(("^ *\\([-]\\) "
+       (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
 
   ;; Ensure that anything that should be fixed-pitch in Org files appears that way
   (set-face-attribute 'org-block nil :foreground nil :inherit 'fixed-pitch)
@@ -489,7 +504,7 @@ Debugger
 
 (use-package org
   :config
-  (setq org-ellipsis " ▼"
+  (setq org-ellipsis ""
         org-hide-emphasis-markers t)
   (jg/org-font-setup))
 
@@ -503,7 +518,6 @@ Debugger
 #+end_src
 
 ** Babel
-
 Code block functionality
 
 #+begin_src emacs-lisp
@@ -542,7 +556,7 @@ Allows customization of bullets (*)
   :after org
   :hook (org-mode . org-bullets-mode)
   :custom
-  (org-bullets-bullet-list '("◉" "●" "○")))
+  (org-bullets-bullet-list '("" "")))
 #+end_src
 
 ** visual-fill-mode
