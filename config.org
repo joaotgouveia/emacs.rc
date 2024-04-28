@@ -473,6 +473,18 @@ Debugger
 (use-package dap-mode)
 #+end_src
 
+** fancy-compilation
+
+Improvements to the basic compilation mode
+
+#+begin_src emacs-lisp
+(use-package fancy-compilation
+  :commands (fancy-compilation-mode))
+
+(with-eval-after-load 'compile
+  (fancy-compilation-mode))
+#+end_src
+
 
 * Org mode
 
