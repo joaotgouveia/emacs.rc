@@ -83,11 +83,20 @@ NOTE: remove for org mode (?)
 (electric-pair-mode t)
 #+end_src
 
-** all-the-icons
+** nerd-icons
 
 #+begin_src emacs-lisp
-(use-package all-the-icons
-  :if (display-graphic-p))
+(use-package nerd-icons)
+#+end_src
+
+** page-break-lines
+
+Displays ugly form feed characters as tidy horizontal rules
+
+#+begin_src emacs-lisp
+(use-package page-break-lines
+  :ensure t
+  :demand t)
 #+end_src
 
 ** Theme
