@@ -298,6 +298,38 @@ NOTE: Not used atm
 (use-package multiple-cursors)
 #+end_src
 
+** dashboard
+
+#+begin_src emacs-lisp
+(use-package dashboard
+  :ensure t
+  :after page-break-lines
+  :init
+  (setq initial-buffer-choice (lambda () (get-buffer-create dashboard-buffer-name)))
+  :custom
+  (dashboard-icon-type 'nerd-icons)
+  (dashboard-set-heading-icons t)
+  (dashboard-set-file-icons t)
+  (dashboard-display-icons-p t)
+  (dashboard-navigation-cycle t)
+  (dashboard-show-shortcuts nil)
+  (dashboard-vertically-center-content t)
+  (dashboard-page-separator "\n\f\n")
+
+  (dashboard-items '((recents   . 5)
+                     (agenda    . 5)))
+
+  (dashboard-item-names '(("Agenda for today:"           . "Today:")
+                          ("Agenda for the coming week:" . "Agenda:")))
+
+  (dashboard-startupify-list '(dashboard-insert-banner
+                               dashboard-insert-items
+                               dashboard-insert-newline
+                               dashboard-insert-footer))
+  :config
+  (dashboard-setup-startup-hook))
+#+end_src
+
 ** Keybindings
 
 #+begin_src emacs-lisp
