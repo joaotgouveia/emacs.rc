@@ -5,7 +5,7 @@
 ** Hooks
 
 #+begin_src emacs-lisp
-(load "hooks")
+(require 'hooks)
 #+end_src
 
 ** Packages

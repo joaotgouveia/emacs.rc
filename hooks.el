@@ -1,5 +1,5 @@
-;; disable evil keybindings in these modes, C-z to activate
 (defun jg/evil-hook ()
+  "Disable evil keybindings in these modes."
     (dolist (mode '(custom-mode
                    eshell-mode
                    git-rebase-mode
@@ -11,8 +11,8 @@
                    term-mode))
     (add-to-list 'evil-emacs-state-modes mode)))
 
-;; whitespace handling (strongly inspired by tsoding's config)
 (defun jg/whitespaces-hook ()
+  "Whitespace handling (strongly inspired by tsoding's config)."
   (whitespace-mode t)
   (setq whitespace-style '(face
     trailing         ; trailing whitespaces
@@ -24,8 +24,8 @@
     missing-newline-at-eof))
   (add-to-list 'write-file-functions 'delete-trailing-whitespace))
 
-;; whitespace handling for org files
 (defun jg/org-whitespaces-hook ()
+  "Whitespace handling for org files."
   (whitespace-mode t)
   (setq whitespace-style '(face
     trailing         ; trailing whitespaces
@@ -36,16 +36,16 @@
     missing-newline-at-eof))
   (add-to-list 'write-file-functions 'delete-trailing-whitespace))
 
-;; org mode settings (strongly inspired by SystemCrafter's config)
 (defun jg/org-hook ()
+  "Org mode settings (strongly inspired by SystemCrafter's config)."
   (org-indent-mode)
   (variable-pitch-mode 1)
   (auto-fill-mode 0)
   (visual-line-mode 1)
   (setq evil-auto-indent nil))
 
-;; auto tangle config file on save (strongly inspired by SystemCrafter's config)
 (defun jg/org-tangle-hook ()
+  "Auto tangle config file on save (strongly inspired by SystemCrafter's config)."
   (when (string-equal (buffer-file-name)
                       (expand-file-name "~/emacs.rc/config.org"))
     ;; Dynamic scoping to the rescue
@@ -53,6 +53,9 @@
       (org-babel-tangle))))
 
 (defun jg/org-visual-fill-hook ()
+  "Center text on screen."
   (setq visual-fill-column-width 125
         visual-fill-column-center-text t)
   (visual-fill-column-mode 1))
+
+(provide 'hooks)
