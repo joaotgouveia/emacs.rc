@@ -571,3 +571,14 @@ Center text on screen
       :defer t
       :hook (org-mode . jg/org-visual-fill-hook))
 #+end_src
+
+** org-sidebar
+
+Sidebar for org files
+
+#+begin_src emacs-lisp
+(use-package org-sidebar)
+
+(evil-define-key '(normal insert) 'org-mode-map
+  (kbd "C-x f") 'org-sidebar-tree-toggle)
+#+end_src
