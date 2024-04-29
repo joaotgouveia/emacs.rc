@@ -393,10 +393,13 @@ GitHub integration (open prs, see issues, etc.)
 ** company
 
 Better completions
-NOTE: kinda slow when active
 
 #+begin_src emacs-lisp
-(use-package company)
+(use-package company
+  :after lsp-mode
+  :hook (prog-mode . company-mode)
+  :bind (:map company-active-map
+          ("<tab>" . company-complete-selection)))
 #+end_src
 
 ** company-box
