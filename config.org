@@ -317,7 +317,7 @@ NOTE: Not used atm
 ;;(evil-define-key 'visual 'global
 ;;  (kbd "a") 'jg/visual-insert)
 
-(evil-define-key 'normal lsp-mode-map
+(evil-define-key 'normal prog-mode-map
   (kbd "C-.") 'lsp-find-definition
   (kbd "C-?") 'lsp-find-references)
 #+end_src
@@ -416,6 +416,17 @@ Makes company look better
   :hook (company-mode . company-box-mode))
 #+end_src
 
+** flycheck
+
+On-the-fly syntax checking
+
+#+begin_src emacs-lisp
+(use-package flycheck
+  :ensure t
+  :config
+  (add-hook 'after-init-hook #'global-flycheck-mode))
+#+end_src
+
 ** lsp-mode
 
 LSP support
@@ -427,9 +438,12 @@ LSP support
   :hook ((python-mode . lsp-deferred)
          (javascript-mode . lsp-deferred)
          (c-mode . lsp-deferred)
+         (c++-mode . lsp-deferred)
          (rust-mode . lsp-deferred)
          (lsp-mode . lsp-enable-which-key-integration))
-  :commands (lsp lsp-deferred))
+  :commands (lsp lsp-deferred)
+  :config
+  (lsp-enable-which-key-integration t))
 #+end_src
 
 ** lsp-ui
