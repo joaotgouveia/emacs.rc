@@ -116,15 +116,6 @@ NOTE: remove for org mode (?)
   :custom ((doom-modeline-height 15)))
 #+end_src
 
-** neotree
-
-#+begin_src emacs-lisp
-(use-package neotree)
-(global-set-key (kbd "C-x f") 'neotree-toggle)
-(setq neo-theme (if (display-graphic-p) 'icons 'classic))
-(add-hook 'neotree-mode-hook 'jg/neotree-hook)
-#+end_src
-
 ** rainbow-delimiters
 
 #+begin_src emacs-lisp
