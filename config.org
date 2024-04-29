@@ -110,8 +110,6 @@ Displays ugly form feed characters as tidy horizontal rules
     doom-themes-enable-italic t)  ; if nil, italics is universally disabled
   (load-theme 'doom-moonlight t)
 
-  ;; enable custom neotree theme
-  (doom-themes-neotree-config)
   ;; corrects (and improves) org-mode's native fontification.
   (doom-themes-org-config))
 #+end_src
