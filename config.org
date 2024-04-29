@@ -443,23 +443,10 @@ LSP support
 Higher level UI modules (flycheck support, code lenses, etc.)
 
 #+begin_src emacs-lisp
-(use-package lsp-ui :commands lsp-ui-mode)
-#+end_src
-
-** lsp-ivy
-
-Ivy interface to the workspace symbol functionality of lsp-mode
-
-#+begin_src emacs-lisp
-(use-package lsp-ivy :commands lsp-ivy-workspace-symbol)
-#+end_src
-
-** lsp-treemacs
-
-Treemacs integration
-
-#+begin_src emacs-lisp
-(use-package lsp-treemacs :commands lsp-treemacs-errors-list)
+(use-package lsp-ui
+  :hook (lsp-mode . lsp-ui-mode)
+  :custom
+  (lsp-ui-doc-position 'bottom))
 #+end_src
 
 ** dap-mode
