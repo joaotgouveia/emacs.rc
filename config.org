@@ -390,14 +390,6 @@ GitHub integration (open prs, see issues, etc.)
 (use-package forge)
 #+end_src
 
-** breadcrumb
-
-Shows where we are in a project
-
-#+begin_src emacs-lisp
-(use-package breadcrumb)
-#+end_src
-
 ** company
 
 Better completions
