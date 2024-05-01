@@ -89,7 +89,6 @@ Displays ugly form feed characters as tidy horizontal rules
 
 #+begin_src emacs-lisp
 (use-package page-break-lines
-  :ensure t
   :demand t)
 #+end_src
 
@@ -97,7 +96,6 @@ Displays ugly form feed characters as tidy horizontal rules
 
 #+begin_src emacs-lisp
 (use-package doom-themes
-  :ensure t
   :config
   ;; global settings (defaults)
   (setq doom-themes-enable-bold t ; if nil, bold is universally disabled
@@ -112,7 +110,6 @@ Displays ugly form feed characters as tidy horizontal rules
 
 #+begin_src emacs-lisp
 (use-package doom-modeline
-  :ensure t
   :init (doom-modeline-mode t)
   :custom ((doom-modeline-height 15)))
 #+end_src
@@ -165,7 +162,7 @@ Automatically update packages
 ** ivy
 
 #+begin_src emacs-lisp
-(use-package swiper :ensure t) ;; swiper sometimes doesn't come included in ivy
+(use-package swiper) ;; swiper sometimes doesn't come included in ivy
 (use-package ivy
   :diminish
   :bind (("C-s" . swiper)
@@ -302,7 +299,6 @@ NOTE: Not used atm
 
 #+begin_src emacs-lisp
 (use-package dashboard
-  :ensure t
   :after page-break-lines
   :init
   (setq initial-buffer-choice (lambda () (get-buffer-create dashboard-buffer-name)))
@@ -456,7 +452,6 @@ On-the-fly syntax checking
 
 #+begin_src emacs-lisp
 (use-package flycheck
-  :ensure t
   :config
   (add-hook 'after-init-hook #'global-flycheck-mode))
 #+end_src
@@ -645,7 +640,6 @@ Improvements to the basic org-cite frontend
 
 #+begin_src emacs-lisp
   (use-package org-roam
-    :ensure t
     :custom
     (org-roam-directory "~/wiki/slipbox")
     (org-roam-capture-templates
