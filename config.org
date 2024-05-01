@@ -533,36 +533,37 @@ Live server
 * Org mode
 
 #+begin_src emacs-lisp
-;; org mode font settings (strongly inspired by SystemCrafter's config)
-(defun jg/org-font-setup ()
-  (dolist (face '((org-level-1 . 1.2)
-                  (org-level-2 . 1.1)
-                  (org-level-3 . 1.05)
-                  (org-level-4 . 1.0)
-                  (org-level-5 . 1.1)
-                  (org-level-6 . 1.1)
-                  (org-level-7 . 1.1)))
-  (set-face-attribute (car face) nil :font "Source Sans Pro" :weight 'regular :height (cdr face)))
+;; org mode appearance settings (strongly inspired by SystemCrafter's config)
+(defun jg/org-appearance-setup ()
+   (dolist (face '((org-level-1 . 1.4)
+                   (org-level-2 . 1.2)
+                   (org-level-3 . 1.1)
+                   (org-level-4 . 1.0)
+                   (org-level-5 . 1.1)
+                   (org-level-6 . 1.1)
+                   (org-level-7 . 1.1)))
+   (set-face-attribute (car face) nil :font "Source Sans Pro" :weight 'regular :height (cdr face)))
 
-  ;; Use • in lists instead of -
-  (font-lock-add-keywords 'org-mode
-   '(("^ *\\([-]\\) "
-       (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
+   ;; Use • in lists instead of -
+   (font-lock-add-keywords 'org-mode
+    '(("^ *\\([-]\\) "
+        (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
 
-  ;; Ensure that anything that should be fixed-pitch in Org files appears that way
-  (set-face-attribute 'org-block nil :foreground nil :inherit 'fixed-pitch)
-  (set-face-attribute 'org-code nil   :inherit '(shadow fixed-pitch))
-  (set-face-attribute 'org-table nil   :inherit '(shadow fixed-pitch))
-  (set-face-attribute 'org-verbatim nil :inherit '(shadow fixed-pitch))
-  (set-face-attribute 'org-special-keyword nil :inherit '(font-lock-comment-face fixed-pitch))
-  (set-face-attribute 'org-meta-line nil :inherit '(font-lock-comment-face fixed-pitch))
-  (set-face-attribute 'org-checkbox nil :inherit 'fixed-pitch))
+   ;; Ensure that anything that should be fixed-pitch in Org files appears that way
+   (set-face-attribute 'org-block nil :foreground nil :inherit 'fixed-pitch)
+   (set-face-attribute 'org-code nil :inherit '(shadow fixed-pitch))
+   (set-face-attribute 'org-table nil :inherit '(shadow fixed-pitch))
+   (set-face-attribute 'org-verbatim nil :inherit '(shadow fixed-pitch))
+   (set-face-attribute 'org-special-keyword nil :inherit '(font-lock-comment-face fixed-pitch))
+   (set-face-attribute 'org-meta-line nil :inherit '(font-lock-comment-face fixed-pitch))
+   (set-face-attribute 'org-checkbox nil :inherit 'fixed-pitch))
 
 (use-package org
   :config
   (setq org-ellipsis ""
         org-hide-emphasis-markers t)
-  (jg/org-font-setup))
+  (jg/org-appearance-setup))
+
 
 (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'jg/org-tangle-hook)))
 #+end_src
@@ -570,7 +571,7 @@ Live server
 ** Whitespace handling
 
 #+begin_src emacs-lisp
-(add-hook 'org-mode-hook 'jg/org-whitespaces-hook)
+;(add-hook 'org-mode-hook 'jg/whitespaces-hook)
 #+end_src
 
 ** Babel
