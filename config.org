@@ -128,6 +128,12 @@ Displays ugly form feed characters as tidy horizontal rules
 
 
 * General
+** Scrolling
+
+#+begin_src emacs-lisp
+(setq scroll-conservatively 101)
+#+end_src
+
 ** auto-package-update
 
 Automatically update packages
