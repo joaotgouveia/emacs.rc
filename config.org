@@ -470,7 +470,7 @@ LSP support
   :init
   (setq lsp-keymap-prefix "C-c l")
   :hook ((python-mode . lsp-deferred)
-         (javascript-mode . lsp-deferred)
+         (js2-mode . lsp-deferred)
          (c-mode . lsp-deferred)
          (c++-mode . lsp-deferred)
          (rust-mode . lsp-deferred)
@@ -509,6 +509,24 @@ Improvements to the basic compilation mode
 
 (with-eval-after-load 'compile
   (fancy-compilation-mode))
+#+end_src
+
+** js2-mode
+
+#+begin_src emacs-lisp
+(use-package js2-mode)
+(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+#+end_src
+
+** skewer-mode
+
+Live server
+
+#+begin_src emacs-lisp
+(use-package skewer-mode)
+(add-hook 'js2-mode-hook 'skewer-mode)
+(add-hook 'css-mode-hook 'skewer-css-mode)
+(add-hook 'html-mode-hook 'skewer-html-mode)
 #+end_src
 
 
