@@ -590,18 +590,75 @@ Code block functionality
 (add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
 #+end_src
 
+** org-cite
+
+Insert citations
+
+#+begin_src emacs-lisp
+(evil-define-key '(normal insert) org-mode-map
+  (kbd "C-c ]") 'org-cite-insert)
+#+end_src
+
+** citar
+
+Improvements to the basic org-cite frontend
+
+#+begin_src emacs-lisp
+(use-package citar
+  :custom
+  (org-cite-global-bibliography '("~/docs/bibliography/library.bib"))
+  (org-cite-insert-processor 'citar)
+  (org-cite-follow-processor 'citar)
+  (org-cite-activate-processor 'citar)
+  (citar-bibliography org-cite-global-bibliography))
+
+(setq citar-templates
+  '((main . "${author editor:30%sn}    ${date year issued:4}    ${title:48}")
+    (suffix . "    ${=key= id:15}    ${=type=:12}    ${tags keywords:*}")
+    (preview . "${author editor:%etal} (${year issued date}) ${title}, ${journal journaltitle publisher container-title collection-title}.\n")
+    (note . "Notes on ${author editor:%etal}, ${title}")))
+
+(defvar citar-indicator-files-icons
+  (citar-indicator-create
+   :symbol (nerd-icons-faicon
+            "nf-fa-file_o"
+            :face 'nerd-icons-green
+            :v-adjust -0.1)
+   :function #'citar-has-files
+   :padding "  " ; need this because the default padding is too low for these icons
+   :tag "has:files"))
+
+(defvar citar-indicator-links-icons
+  (citar-indicator-create
+   :symbol (nerd-icons-faicon
+            "nf-fa-link"
+            :face 'nerd-icons-blue
+            :v-adjust 0.01)
+   :function #'citar-has-links
+   :padding "  "
+   :tag "has:links"))
+
+(setq citar-indicators (list citar-indicator-files-icons citar-indicator-links-icons))
+#+end_src
+
 ** org-roam
 
 #+begin_src emacs-lisp
-(use-package org-roam
-  :ensure t
-  :custom
-  (org-roam-directory "~/wiki/slipbox")
-  :bind (("C-c n l" . org-roam-buffer-toggle)
-         ("C-c n f" . org-roam-node-find)
-         ("C-c n i" . org-roam-node-insert))
-  :config
-  (org-roam-setup))
+  (use-package org-roam
+    :ensure t
+    :custom
+    (org-roam-directory "~/wiki/slipbox")
+    (org-roam-capture-templates
+     '(("l" "literature" plain
+        "* ${title}\n\n%?\n\n* References\n\n#+print_bibliography:"
+        :if-new
+        (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
+        :unnarrowed t)))
+    :bind (("C-c n l" . org-roam-buffer-toggle)
+           ("C-c n f" . org-roam-node-find)
+           ("C-c n i" . org-roam-node-insert))
+    :config
+    (org-roam-setup))
 #+end_src
 
 ** org-bullets
