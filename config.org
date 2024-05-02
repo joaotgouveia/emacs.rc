@@ -54,6 +54,7 @@
                 shell-mode-hook
                 eshell-mode-hook
                 neotree-mode-hook
+                pdf-view-mode-hook
                 org-mode-hook))
         (add-hook mode (lambda () (display-line-numbers-mode 0))))
 #+end_src
@@ -325,6 +326,18 @@ NOTE: Not used atm
                                dashboard-insert-footer))
   :config
   (dashboard-setup-startup-hook))
+#+end_src
+
+** pdf-tools
+
+View pdfs inside emacs
+
+#+begin_src emacs-lisp
+(use-package pdf-tools
+  :config
+  (pdf-tools-install)
+  (setq-default pdf-view-display-size 'fit-width)
+  (define-key pdf-view-mode-map (kbd "/") 'isearch-forward))
 #+end_src
 
 ** Keybindings
