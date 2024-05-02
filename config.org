@@ -683,19 +683,53 @@ Improvements to the basic org-cite frontend
 
 ** org-roam
 
+Used for literature, permanent and structure notes
+
 #+begin_src emacs-lisp
-  (use-package org-roam
-    :custom
-    (org-roam-directory "~/wiki/slipbox")
-    (org-roam-capture-templates
-     '(("l" "literature" plain
-        "* ${title}\n\n%?\n\n* References\n\n#+print_bibliography:"
-        :if-new
-        (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
-        :unnarrowed t)))
-    :bind (("C-c n l" . org-roam-buffer-toggle)
-           ("C-c n f" . org-roam-node-find)
-           ("C-c n i" . org-roam-node-insert))
-    :config
-    (org-roam-setup))
+(use-package org-roam
+  :demand t
+  :custom
+  (org-roam-directory "~/wiki/slipbox")
+  (org-roam-capture-templates
+   '(("p" "permanent note" plain
+    "* ${title}\n\n%?\n\n"
+    :if-new
+    (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
+    "#+title: ${title}\n#+created: %U\n\n")
+    :unnarrowed t)
+     ("l" "literature note" plain
+    "\n* ${title}\n\n%?\n\n"
+    :if-new
+    (file+head "%(expand-file-name citar-org-roam-subdir org-roam-directory)/${citar-citekey}.org"
+    "#+title: ${note-title}\n#+created: %U\n")
+    :unnarrowed t)))
+  :bind (("C-c n l" . org-roam-buffer-toggle)
+         ("C-c n f" . org-roam-node-find)
+         ("C-c n i" . org-roam-node-insert))
+  :config
+  (org-roam-setup))
+#+end_src
+
+** citar-org-roam
+
+Tighter citar and org-roam integration
+
+#+begin_src emacs-lisp
+(use-package citar-org-roam
+  :after (citar org-roam)
+  :config (citar-org-roam-mode))
+(setq citar-org-roam-capture-template-key "l")
+(setq citar-org-roam-subdir "literature")
+#+end_src
+
+** org-capture
+
+Used for project and fleeting notes
+
+#+begin_src emacs-lisp
+    (setq org-capture-templates
+          '(("f" "fleeting note" entry (file "~/wiki/fleeting.org")
+             "** TODO %^{Note title}\nRegistered on:%U\n%?" :empty-lines-before 1)
+            ("p" "project note" entry (file (concat (or projectile-project-root "~") "/notes.org"))
+             "** TODO %?\nRegistered on:%U\n" :empty-lines-before 1)))
 #+end_src
