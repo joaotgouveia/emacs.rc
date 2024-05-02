@@ -621,6 +621,12 @@ Sidebar for org files
 
 * Note taking
 
+A lot of inspiration for this setup came from:
+- [[https://jonathanabennett.github.io/blog/2019/05/29/writing-academic-papers-with-org-mode/][Writing academic papers with org mode]]
+- [[https://honnef.co/articles/my-org-roam-workflows-for-taking-notes-and-writing-articles/][My org-roam workflows for taking notes and writing articles]]
+- [[https://kristofferbalintona.me/posts/202206141852/][Citations in org-mode: Org-cite and Citar]]
+- [[https://emacsconf.org/2021/talks/research/][EmacsConf 2021: Managing a research workflow (bibliographies, note-taking, and arXiv)]]
+
 ** org-cite
 
 Insert citations
