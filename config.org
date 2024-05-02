@@ -668,17 +668,17 @@ Improvements to the basic org-cite frontend
    :padding "  " ; need this because the default padding is too low for these icons
    :tag "has:files"))
 
-(defvar citar-indicator-links-icons
+(defvar citar-indicator-notes-icons
   (citar-indicator-create
-   :symbol (nerd-icons-faicon
-            "nf-fa-link"
+   :symbol (nerd-icons-codicon
+            "nf-cod-note"
             :face 'nerd-icons-blue
-            :v-adjust 0.01)
-   :function #'citar-has-links
-   :padding "  "
-   :tag "has:links"))
+            :v-adjust -0.3)
+   :function #'citar-has-notes
+   :padding "    "
+   :tag "has:notes"))
 
-(setq citar-indicators (list citar-indicator-files-icons citar-indicator-links-icons))
+(setq citar-indicators (list citar-indicator-files-icons citar-indicator-notes-icons))
 #+end_src
 
 ** org-roam
