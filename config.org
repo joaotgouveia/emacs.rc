@@ -497,6 +497,8 @@ LSP support
          (astro-mode . lsp-deferred)
          (lsp-mode . lsp-enable-which-key-integration))
   :commands (lsp lsp-deferred)
+  :custom
+  (lsp-headerline-breadcrumb-enable nil)
   :config
   (lsp-enable-which-key-integration t))
 #+end_src
