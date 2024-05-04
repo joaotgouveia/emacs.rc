@@ -82,6 +82,17 @@ NOTE: remove for org mode (?)
 
 #+begin_src emacs-lisp
 (use-package nerd-icons)
+(setq nerd-icons-extension-icon-alist
+      (append '(("astro" nerd-icons-sucicon "nf-custom-astro" :face nerd-icons-orange))
+              nerd-icons-extension-icon-alist))
+#+end_src
+
+** nerd-icons-dired
+
+#+begin_src emacs-lisp
+(use-package nerd-icons-dired
+  :hook
+  (dired-mode . nerd-icons-dired-mode))
 #+end_src
 
 ** page-break-lines
@@ -483,6 +494,7 @@ LSP support
          (c-mode . lsp-deferred)
          (c++-mode . lsp-deferred)
          (rust-mode . lsp-deferred)
+         (astro-mode . lsp-deferred)
          (lsp-mode . lsp-enable-which-key-integration))
   :commands (lsp lsp-deferred)
   :config
@@ -543,6 +555,22 @@ Live server
 #+begin_src emacs-lisp
 (use-package lsp-tailwindcss)
 #+end_src
+
+** web-mode
+
+#+begin_src emacs-lisp
+(use-package web-mode)
+#+end_src
+
+** astro-mode
+
+#+begin_src emacs-lisp
+(define-derived-mode astro-mode web-mode "astro")
+(setq auto-mode-alist
+      (append '((".*\\.astro\\'" . astro-mode))
+              auto-mode-alist))
+#+end_src
+
 
 * Org mode
 
