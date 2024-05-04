@@ -517,7 +517,8 @@ Higher level UI modules (flycheck support, code lenses, etc.)
 Debugger
 
 #+begin_src emacs-lisp
-(use-package dap-mode)
+(use-package dap-mode
+  :after lsp-mode)
 #+end_src
 
 ** fancy-compilation
@@ -553,7 +554,8 @@ Live server
 ** lsp-tailwindcss
 
 #+begin_src emacs-lisp
-(use-package lsp-tailwindcss)
+(use-package lsp-tailwindcss
+  :after lsp-mode)
 #+end_src
 
 ** web-mode
