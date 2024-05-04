@@ -293,7 +293,7 @@ Evil keybindings for different emacs modes
 NOTE: Not used atm
 
 #+begin_src emacs-lisp
-(use-package multiple-cursors)
+;(use-package multiple-cursors)
 #+end_src
 
 ** dashboard
