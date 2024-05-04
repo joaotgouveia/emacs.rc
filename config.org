@@ -24,9 +24,9 @@
 ;; load use-package
 (unless (package-installed-p 'use-package)
 ;; install it if it isn't already installed
-   (package-install 'use-package))
- (require 'use-package)
- (setq use-package-always-ensure t)
+  (package-install 'use-package))
+(require 'use-package)
+(setq use-package-always-ensure t)
 #+end_src
 
 
