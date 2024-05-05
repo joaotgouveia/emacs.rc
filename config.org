@@ -450,27 +450,6 @@ GitHub integration (open prs, see issues, etc.)
 (use-package forge)
 #+end_src
 
-** company
-
-Better completions
-
-#+begin_src emacs-lisp
-(use-package company
-  :after lsp-mode
-  :hook (prog-mode . company-mode)
-  :bind (:map company-active-map
-          ("<tab>" . company-complete-selection)))
-#+end_src
-
-** company-box
-
-Makes company look better
-
-#+begin_src emacs-lisp
-(use-package company-box
-  :hook (company-mode . company-box-mode))
-#+end_src
-
 ** flycheck
 
 On-the-fly syntax checking
