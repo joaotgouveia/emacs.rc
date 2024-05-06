@@ -546,6 +546,15 @@ Live server
               auto-mode-alist))
 #+end_src
 
+** tsx-mode
+
+#+begin_src emacs-lisp
+(define-derived-mode tsx-mode web-mode "tsx")
+(setq auto-mode-alist
+      (append '((".*\\.tsx\\'" . tsx-mode))
+              auto-mode-alist))
+#+end_src
+
 
 * Org mode
 
