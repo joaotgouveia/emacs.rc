@@ -392,11 +392,10 @@ View pdfs inside emacs
 
 ** Tree-sitter
 
-NOTE: Currently crashing
-
 #+begin_src emacs-lisp
-;;(setq major-mode-remap-alist
-;; '((javascript-mode . js-ts-mode)))
+(setq major-mode-remap-alist
+ '((javascript-mode . js-ts-mode)
+   (c-mode . c-ts-mode)))
 #+end_src
 
 ** evil-nerd-commenter
@@ -469,8 +468,8 @@ LSP support
   :init
   (setq lsp-keymap-prefix "C-c l")
   :hook ((python-mode . lsp-deferred)
-         (js2-mode . lsp-deferred)
-         (c-mode . lsp-deferred)
+         (js-ts-mode . lsp-deferred)
+         (c-ts-mode . lsp-deferred)
          (c++-mode . lsp-deferred)
          (rust-mode . lsp-deferred)
          (astro-mode . lsp-deferred)
