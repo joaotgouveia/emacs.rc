@@ -513,13 +513,6 @@ Improvements to the basic compilation mode
   (fancy-compilation-mode))
 #+end_src
 
-** js2-mode
-
-#+begin_src emacs-lisp
-(use-package js2-mode)
-(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
-#+end_src
-
 ** skewer-mode
 
 Live server
