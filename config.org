@@ -38,7 +38,7 @@
 (setq-default inhibit-startup-message t            ; disable startup screen
               ring-bell-function 'ignore           ; disable sounds
               make-backup-files nil                ; disable backup files
-              tab-width 2
+              tab-width 4
               indent-tabs-mode nil                 ; use spaces instead of tabs
               display-line-numbers-type 'relative) ; use relative line numbers
 (scroll-bar-mode -1)   ; disable visible scrollbar
