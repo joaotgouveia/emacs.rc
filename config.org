@@ -761,6 +761,6 @@ Used for project and fleeting notes
     (setq org-capture-templates
           '(("f" "fleeting note" entry (file "~/wiki/fleeting.org")
              "** TODO %^{Note title}\nRegistered on:%U\n%?" :empty-lines-before 1)
-            ("p" "project note" entry (file (concat (or projectile-project-root "~") "/notes.org"))
-             "** TODO %?\nRegistered on:%U\n" :empty-lines-before 1)))
+            ("p" "project note" entry (file "~/wiki/project-notes.org")
+             "* %^{Project name}\n\n** TODO %?\n")))
 #+end_src
