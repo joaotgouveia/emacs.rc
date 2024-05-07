@@ -668,6 +668,8 @@ Insert citations
 #+begin_src emacs-lisp
 (evil-define-key '(normal insert) org-mode-map
   (kbd "C-c ]") 'org-cite-insert)
+
+(setq org-cite-csl-styles-dir (expand-file-name "~/docs/zotero/styles/"))
 #+end_src
 
 ** citar
@@ -688,8 +690,6 @@ Improvements to the basic org-cite frontend
     (suffix . "    ${=key= id:15}    ${=type=:12}    ${tags keywords:*}")
     (preview . "${author editor:%etal} (${year issued date}) ${title}, ${journal journaltitle publisher container-title collection-title}.\n")
     (note . "Notes on ${author editor:%etal}, ${title}")))
-
-(setq org-cite-csl-styles-dir (expand-file-name "~/docs/zotero/styles/"))
 
 (defvar citar-indicator-files-icons
   (citar-indicator-create
@@ -714,33 +714,64 @@ Improvements to the basic org-cite frontend
 (setq citar-indicators (list citar-indicator-files-icons citar-indicator-notes-icons))
 #+end_src
 
-** org-roam
+** citeproc
 
-Used for literature, permanent and structure notes
+Rendering citations and bibliographies in styles described in CSL
 
 #+begin_src emacs-lisp
-(use-package org-roam
-  :demand t
-  :custom
-  (org-roam-directory "~/wiki/slipbox")
-  (org-roam-capture-templates
-   '(("p" "permanent note" plain
-    "* ${title}\n\n%?\n\n"
-    :if-new
-    (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
-    "#+title: ${title}\n#+created: %U\n\n")
-    :unnarrowed t)
-     ("l" "literature note" plain
-    "\n* ${title}\n\n%?\n\n"
-    :if-new
-    (file+head "%(expand-file-name citar-org-roam-subdir org-roam-directory)/${citar-citekey}.org"
-    "#+title: ${note-title}\n#+created: %U\n")
-    :unnarrowed t)))
-  :bind (("C-c n l" . org-roam-buffer-toggle)
-         ("C-c n f" . org-roam-node-find)
-         ("C-c n i" . org-roam-node-insert))
+(use-package citeproc
   :config
-  (org-roam-setup))
+  (setq org-cite-export-processors (csl "ieee" "ieee")))
+
+;; The IEEE style causes an error when trying to export an empty bibliography.
+(defun dh/org-cite-export-bibliography-advice (fn keyword _ info)
+  (if (org-cite-list-keys info)
+      (funcall fn keyword nil info)))
+
+(advice-add #'org-cite-export-bibliography :around #'dh/org-cite-export-bibliography-advice)
+#+end_src
+
+** org-roam
+
+Used for blog posts and literature and permanent notes
+
+#+begin_src emacs-lisp
+  (use-package org-roam
+    :demand t
+    :custom
+    (org-roam-directory "~/wiki/slipbox")
+    (org-roam-capture-templates
+     '(("p" "permanent note" plain
+      "* ${title}\n\n%?\n\n"
+      :if-new
+      (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
+      "#+title: ${title}\n#+created: %U\n\n")
+      :unnarrowed t)
+       ("l" "literature note" plain
+      "\n* ${title}\n\n%?\n\n"
+      :if-new
+      (file+head "%(expand-file-name citar-org-roam-subdir org-roam-directory)/${citar-citekey}.org"
+      "#+title: ${note-title}\n#+created: %U\n")
+      :unnarrowed t)
+      ("b" "blog post" plain
+      "\n%?\n\n* References\n\n#+print_bibliography"
+      :if-new
+      (file+head "${slug}.org"
+      ":PROPERTIES:
+:kind: blog post
+:END:
+#+OPTIONS: toc:nil
+#+title: ${title}
+#+author:
+#+filetags:
+#+created: %U
+#+publishdate:\n\n")
+      :unnarrowed t)))
+    :bind (("C-c n l" . org-roam-buffer-toggle)
+           ("C-c n f" . org-roam-node-find)
+           ("C-c n i" . org-roam-node-insert))
+    :config
+    (org-roam-setup))
 #+end_src
 
 ** citar-org-roam
@@ -760,9 +791,24 @@ Tighter citar and org-roam integration
 Used for project and fleeting notes
 
 #+begin_src emacs-lisp
-    (setq org-capture-templates
-          '(("f" "fleeting note" entry (file "~/wiki/fleeting.org")
-             "** TODO %^{Note title}\nRegistered on:%U\n%?" :empty-lines-before 1)
-            ("p" "project note" entry (file "~/wiki/project-notes.org")
-             "* %^{Project name}\n\n** TODO %?\n")))
+(setq org-capture-templates
+      '(("f" "fleeting note" entry (file "~/wiki/fleeting.org")
+         "** TODO %^{Note title}\nRegistered on:%U\n%?" :empty-lines-before 1)
+        ("p" "project note" entry (file "~/wiki/project-notes.org")
+         "* %^{Project name}\n\n** TODO %?\n")))
+#+end_src
+
+* Blog
+
+Setup inspired by [[https://honnef.co/articles/my-org-roam-workflows-for-taking-notes-and-writing-articles/][My org-roam workflows for taking notes and writing articles]]
+
+** ox-hugo
+
+Export Org to Hugo-compatible Markdown. I use Astro for my blog but it's pretty much the same.
+
+#+begin_src emacs-lisp
+(use-package ox-hugo
+  :after ox
+  :config
+  (setq org-hugo-base-dir "~/dev/website/src/content/blog"))
 #+end_src
