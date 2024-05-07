@@ -679,6 +679,7 @@ Insert citations
   (kbd "C-c ]") 'org-cite-insert)
 
 (setq org-cite-csl-styles-dir (expand-file-name "~/docs/zotero/styles/"))
+(setq org-cite-export-processors '(t . (csl "ieee" "ieee")))
 #+end_src
 
 ** citar
@@ -728,10 +729,7 @@ Improvements to the basic org-cite frontend
 Rendering citations and bibliographies in styles described in CSL
 
 #+begin_src emacs-lisp
-(use-package citeproc
-  :config
-  (setq org-cite-export-processors (csl "ieee" "ieee")))
-
+(use-package citeproc)
 ;; The IEEE style causes an error when trying to export an empty bibliography.
 (defun dh/org-cite-export-bibliography-advice (fn keyword _ info)
   (if (org-cite-list-keys info)
