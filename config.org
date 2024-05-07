@@ -427,8 +427,7 @@ Managing projects
   :bind-keymap
   ("C-c p" . projectile-command-map)
   :init
-  (when (file-directory-p "~/dev"))
-    (setq projectile-project-search-path '("~/dev")))
+  (setq projectile-project-search-path '(("~/dev" . 1))))
 #+end_src
 
 ** counsel-projectile
