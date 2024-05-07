@@ -473,6 +473,8 @@ LSP support
          (c++-mode . lsp-deferred)
          (rust-mode . lsp-deferred)
          (astro-mode . lsp-deferred)
+         (typescript-mode . lsp-deferred)
+         (tsx-mode . lsp-deferred)
          (lsp-mode . lsp-enable-which-key-integration))
   :commands (lsp lsp-deferred)
   :custom
@@ -546,13 +548,13 @@ Live server
               auto-mode-alist))
 #+end_src
 
-** tsx-mode
+** typescript-mode
 
 #+begin_src emacs-lisp
-(define-derived-mode tsx-mode web-mode "tsx")
-(setq auto-mode-alist
-      (append '((".*\\.tsx\\'" . tsx-mode))
-              auto-mode-alist))
+(use-package typescript-mode
+  :config
+  (define-derived-mode tsx-mode typescript-mode "tsx")
+  (add-to-list 'auto-mode-alist '(".*\\.tsx\\'" . typescriptreact-mode)))
 #+end_src
 
 
