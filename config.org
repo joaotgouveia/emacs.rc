@@ -135,6 +135,21 @@ Displays ugly form feed characters as tidy horizontal rules
   ;; prog-mode is the base mode for any programming language mode
 #+end_src
 
+** solaire-mode
+
+Visually distinguish real buffers from pop-ups, sidebars, etc
+
+#+begin_src emacs-lisp
+(use-package solaire-mode
+  :after dashboard
+  :config
+  (solaire-global-mode t))
+
+(defun jg/real-buffer-p ()
+  (or (solaire-mode-real-buffer-p) 'dashboard-mode))
+(setq solaire-mode-real-buffer-fn 'jg/real-buffer-p)
+#+end_src
+
 
 * General
 ** Scrolling
