@@ -805,17 +805,3 @@ Used for project and fleeting notes
          "* %^{Project name}\n\n** TODO %?\n")))
 #+end_src
 
-* Blog
-
-Setup inspired by [[https://honnef.co/articles/my-org-roam-workflows-for-taking-notes-and-writing-articles/][My org-roam workflows for taking notes and writing articles]]
-
-** ox-hugo
-
-Export Org to Hugo-compatible Markdown. I use Astro for my blog but it's pretty much the same.
-
-#+begin_src emacs-lisp
-(use-package ox-hugo
-  :after ox
-  :config
-  (setq org-hugo-base-dir "~/dev/website/src/content/blog"))
-#+end_src
