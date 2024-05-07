@@ -752,27 +752,13 @@ Used for blog posts and literature and permanent notes
       "* ${title}\n\n%?\n\n"
       :if-new
       (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
-      "#+title: ${title}\n#+created: %U\n\n")
+      "#+title: ${title}\n#+date: %U\n\n")
       :unnarrowed t)
        ("l" "literature note" plain
       "\n* ${title}\n\n%?\n\n"
       :if-new
       (file+head "%(expand-file-name citar-org-roam-subdir org-roam-directory)/${citar-citekey}.org"
-      "#+title: ${note-title}\n#+created: %U\n")
-      :unnarrowed t)
-      ("b" "blog post" plain
-      "\n%?\n\n* References\n\n#+print_bibliography"
-      :if-new
-      (file+head "${slug}.org"
-      ":PROPERTIES:
-:kind: blog post
-:END:
-#+OPTIONS: toc:nil
-#+title: ${title}
-#+author:
-#+filetags:
-#+created: %U
-#+publishdate:\n\n")
+      "#+title: ${note-title}\n#+date: %U\n")
       :unnarrowed t)))
     :bind (("C-c n l" . org-roam-buffer-toggle)
            ("C-c n f" . org-roam-node-find)
@@ -799,9 +785,12 @@ Used for project and fleeting notes
 
 #+begin_src emacs-lisp
 (setq org-capture-templates
-      '(("f" "fleeting note" entry (file "~/wiki/fleeting.org")
-         "** TODO %^{Note title}\nRegistered on:%U\n%?" :empty-lines-before 1)
-        ("p" "project note" entry (file "~/wiki/project-notes.org")
-         "* %^{Project name}\n\n** TODO %?\n")))
+  '(("f" "fleeting note" entry (file "~/wiki/fleeting.org")
+     "** TODO %^{note title}\nRegistered on:%U\n%?" :empty-lines-before 1)
+    ("p" "project note" entry (file "~/wiki/project-notes.org")
+     "* %^{project name}\n\n** TODO %?\n")
+    ("b" "blog post" plain (file "~/wiki/blog/post.org")
+     "#+title: %^{title}\n#+author: João Gouveia\n#+date:\n\n%?\n\n* References\n\n#+print_bibliography"
+     :unnarrowed t)))
 #+end_src
 
