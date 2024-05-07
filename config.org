@@ -678,8 +678,8 @@ Insert citations
 (evil-define-key '(normal insert) org-mode-map
   (kbd "C-c ]") 'org-cite-insert)
 
-(setq org-cite-csl-styles-dir (expand-file-name "~/docs/zotero/styles/"))
-(setq org-cite-export-processors '(t . (csl "ieee" "ieee")))
+(setq org-cite-csl-styles-dir (expand-file-name "~/docs/bibliography/zotero/styles/"))
+(setq org-cite-export-processors '((t . (csl "ieee.csl"))))
 #+end_src
 
 ** citar
