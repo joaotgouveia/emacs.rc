@@ -82,9 +82,9 @@ NOTE: remove for org mode (?)
 
 #+begin_src emacs-lisp
 (use-package nerd-icons)
-(setq nerd-icons-extension-icon-alist
-      (append '(("astro" nerd-icons-sucicon "nf-custom-astro" :face nerd-icons-orange))
-              nerd-icons-extension-icon-alist))
+
+(add-to-list 'nerd-icons-extension-icon-alist '("astro" nerd-icons-sucicon "nf-custom-astro" :face nerd-icons-orange))
+(add-to-list 'nerd-icons-extension-icon-alist '("mjs" nerd-icons-devicon "nf-dev-javascript" :face nerd-icons-yellow))
 #+end_src
 
 ** nerd-icons-dired
