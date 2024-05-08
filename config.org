@@ -336,10 +336,8 @@ NOTE: Not used atm
   (dashboard-page-separator "\n\f\n")
 
   (dashboard-items '((recents   . 5)
-                     (agenda    . 5)))
+                     (projects  . 5)))
 
-  (dashboard-item-names '(("Agenda for today:"           . "Today:")
-                          ("Agenda for the coming week:" . "Agenda:")))
 
   (dashboard-startupify-list '(dashboard-insert-banner
                                dashboard-insert-items
