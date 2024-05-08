@@ -564,6 +564,12 @@ Live server
   (add-to-list 'auto-mode-alist '(".*\\.tsx\\'" . tsx-mode)))
 #+end_src
 
+** mjs-mode
+
+#+begin_src emacs-lisp
+(add-to-list 'auto-mode-alist '(".*\\.mjs\\'" . javascript-mode))
+#+end_src
+
 
 * Org mode
 
