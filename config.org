@@ -563,7 +563,7 @@ Live server
 (use-package typescript-mode
   :config
   (define-derived-mode tsx-mode typescript-mode "tsx")
-  (add-to-list 'auto-mode-alist '(".*\\.tsx\\'" . typescriptreact-mode)))
+  (add-to-list 'auto-mode-alist '(".*\\.tsx\\'" . tsx-mode)))
 #+end_src
 
 
