@@ -794,7 +794,7 @@ Used for project and fleeting notes
     ("p" "project note" entry (file "~/wiki/project-notes.org")
      "* %^{project name}\n\n** TODO %?\n")
     ("b" "blog post" plain (file "~/wiki/blog/post.org")
-     "#+title: %^{title}\n#+author: João Gouveia\n#+date:\n\n%?\n\n* References\n\n#+print_bibliography:"
+     "#+title: %^{title}\n#+author: João Gouveia\n#+date:\n\n%?\n\n** References\n\n#+print_bibliography:"
      :unnarrowed t)))
 #+end_src
 
