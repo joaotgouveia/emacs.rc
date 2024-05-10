@@ -759,7 +759,7 @@ Used for blog posts and literature and permanent notes
       "#+title: ${title}\n#+date: %U\n\n")
       :unnarrowed t)
        ("l" "literature note" plain
-      "\n* ${title}\n\n%?\n\n"
+      "\n* %?\n\n"
       :if-new
       (file+head "%(expand-file-name citar-org-roam-subdir org-roam-directory)/${citar-citekey}.org"
       "#+title: ${note-title}\n#+date: %U\n")
