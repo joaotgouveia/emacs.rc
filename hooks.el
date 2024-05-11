@@ -54,7 +54,7 @@
 
 (defun jg/org-visual-fill-hook ()
   "Center text on screen."
-  (setq visual-fill-column-width 125
+  (setq visual-fill-column-width 75
         visual-fill-column-center-text t)
   (visual-fill-column-mode 1))
 
