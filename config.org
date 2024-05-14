@@ -526,17 +526,6 @@ Improvements to the basic compilation mode
   (fancy-compilation-mode))
 #+end_src
 
-** skewer-mode
-
-Live server
-
-#+begin_src emacs-lisp
-(use-package skewer-mode)
-(add-hook 'js2-mode-hook 'skewer-mode)
-(add-hook 'css-mode-hook 'skewer-css-mode)
-(add-hook 'html-mode-hook 'skewer-html-mode)
-#+end_src
-
 ** lsp-tailwindcss
 
 #+begin_src emacs-lisp
