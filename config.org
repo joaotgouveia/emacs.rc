@@ -564,13 +564,15 @@ Improvements to the basic compilation mode
 ** flex-mode
 
 #+begin_src emacs-lisp
-(add-to-list 'auto-mode-alist '(".*\\.l\\'" . c++-mode))
+(define-derived-mode flex-mode c++-mode "flex")
+(add-to-list 'auto-mode-alist '(".*\\.l\\'" . flex-mode))
 #+end_src
 
 ** yacc-mode
 
 #+begin_src emacs-lisp
-(add-to-list 'auto-mode-alist '(".*\\.y\\'" . c++-mode))
+(define-derived-mode yacc-mode c++-mode "yacc")
+(add-to-list 'auto-mode-alist '(".*\\.y\\'" . yacc-mode))
 #+end_src
 
 
