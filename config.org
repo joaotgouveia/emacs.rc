@@ -575,6 +575,14 @@ Improvements to the basic compilation mode
 (add-to-list 'auto-mode-alist '(".*\\.y\\'" . yacc-mode))
 #+end_src
 
+** hl-line-mode
+
+Highlight current line
+
+#+begin_src emacs-lisp
+(add-hook 'prog-mode-hook (lambda () (hl-line-mode 1)))
+#+end_src
+
 
 * Org mode
 
