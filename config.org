@@ -619,13 +619,14 @@ Highlight current line
   (jg/org-appearance-setup))
 
 
+(add-hook 'org-mode-hook 'jg/org-hook)
 (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'jg/org-tangle-hook)))
 #+end_src
 
 ** Whitespace handling
 
 #+begin_src emacs-lisp
-;(add-hook 'org-mode-hook 'jg/whitespaces-hook)
+(add-hook 'org-mode-hook 'jg/whitespaces-hook)
 #+end_src
 
 ** Babel
