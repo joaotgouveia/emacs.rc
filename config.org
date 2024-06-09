@@ -678,6 +678,15 @@ Sidebar for org files
   (kbd "C-x f") 'org-sidebar-tree-toggle)
 #+end_src
 
+** org-present
+
+Slides in org-mode
+
+#+begin_src emacs-lisp
+(use-package org-present)
+(add-hook 'org-present-mode-hook 'jg/org-present-hook)
+#+end_src
+
 
 * Note taking
 
