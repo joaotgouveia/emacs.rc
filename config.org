@@ -655,7 +655,7 @@ Allows customization of bullets (*)
   :after org
   :hook (org-mode . org-bullets-mode)
   :custom
-  (org-bullets-bullet-list '("" "")))
+  (org-bullets-bullet-list '("" "" "")))
 #+end_src
 
 ** visual-fill-mode
@@ -820,4 +820,3 @@ Used for project and fleeting notes
      "#+title: %^{title}\n#+author: João Gouveia\n#+pubDate:\n\n%?\n\n** References\n\n#+print_bibliography:"
      :unnarrowed t)))
 #+end_src
-
