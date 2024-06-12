@@ -341,6 +341,12 @@ NOTE: Not used atm
                      (projects  . 5)))
 
   (dashboard-footer-messages '("It's been emotional"
+                               "Leave the gun, take the cannoli"
+                               "You never meet anybody that thinks they're a bad person"
+                               "Vincent, we happy?"
+                               "If you win you win, if you lose you still win"
+                               "Who put this thing together? Me, that's who"
+                               "But if I leave, the fans still gon' love me man?"
                                "As greedy as a pig"))
 
   (dashboard-startupify-list '(dashboard-insert-banner
