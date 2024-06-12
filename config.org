@@ -65,7 +65,7 @@
 (defun jg/set-font-faces ()
   (set-face-attribute 'default nil :font "JetBrains Mono" :height 160)
   (set-face-attribute 'fixed-pitch nil :font "JetBrains Mono" :height 160)
-  (set-face-attribute 'variable-pitch nil :font "Source Sans Pro" :height 160))
+  (set-face-attribute 'variable-pitch nil :font "Source Sans Pro" :height 180))
 
 (jg/set-font-faces)
 #+end_src
@@ -589,10 +589,10 @@ Highlight current line
 #+begin_src emacs-lisp
 ;; org mode appearance settings (strongly inspired by SystemCrafter's config)
 (defun jg/org-appearance-setup ()
-   (dolist (face '((org-level-1 . 1.4)
-                   (org-level-2 . 1.2)
-                   (org-level-3 . 1.1)
-                   (org-level-4 . 1.0)
+   (dolist (face '((org-level-1 . 1.2)
+                   (org-level-2 . 1.1)
+                   (org-level-3 . 1.0)
+                   (org-level-4 . 1.1)
                    (org-level-5 . 1.1)
                    (org-level-6 . 1.1)
                    (org-level-7 . 1.1)))
