@@ -181,7 +181,8 @@ Automatically update packages
     ("C-r" . 'counsel-minibuffer-history))
   :config
   ;; don't start searches with ^
-  (setq ivy-initial-inputs-alist nil))
+  ;;(setq ivy-initial-inputs-alist nil)
+  )
 #+end_src
 
 ** ivy
