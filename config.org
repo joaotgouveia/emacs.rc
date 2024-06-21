@@ -54,6 +54,7 @@
                 shell-mode-hook
                 eshell-mode-hook
                 neotree-mode-hook
+                ement-room-mode-hook
                 pdf-view-mode-hook
                 org-mode-hook))
         (add-hook mode (lambda () (display-line-numbers-mode 0))))
@@ -825,4 +826,15 @@ Used for project and fleeting notes
     ("b" "blog post" plain (file "~/wiki/blog/post.org")
      "#+title: %^{title}\n#+author: João Gouveia\n#+pubDate:\n\n%?\n\n** References\n\n#+print_bibliography:"
      :unnarrowed t)))
+#+end_src
+
+
+* Socials
+
+** ement
+
+Matrix client
+
+#+begin_src emacs-lisp
+(use-package ement)
 #+end_src
