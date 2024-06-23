@@ -520,16 +520,9 @@ Better completions
 #+begin_src emacs-lisp
 (use-package company
   :after lsp-mode
-  :hook (prog-mode . company-mode))
-#+end_src
-
-** company-box
-
-Prettier company ui
-
-#+begin_src emacs-lisp
-(use-package company-box
-  :hook (company-mode . company-box-mode))
+  :hook (prog-mode . company-mode)
+  :config
+  (setq company-format-margin-function 'company-text-icons-margin))
 #+end_src
 
 ** dap-mode
