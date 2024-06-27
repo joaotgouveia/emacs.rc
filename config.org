@@ -519,15 +519,6 @@ Better completions
   (setq company-format-margin-function 'company-text-icons-margin))
 #+end_src
 
-** dap-mode
-
-Debugger
-
-#+begin_src emacs-lisp
-(use-package dap-mode
-  :after lsp-mode)
-#+end_src
-
 ** fancy-compilation
 
 Improvements to the basic compilation mode
