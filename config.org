@@ -603,11 +603,6 @@ Highlight current line
                    (org-level-7 . 1.1)))
    (set-face-attribute (car face) nil :font "SourceSans3" :weight 'regular :height (cdr face)))
 
-   ;; Use • in lists instead of -
-   (font-lock-add-keywords 'org-mode
-    '(("^ *\\([-]\\) "
-        (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
-
    ;; Ensure that anything that should be fixed-pitch in Org files appears that way
    (set-face-attribute 'org-block nil :foreground nil :inherit 'fixed-pitch)
    (set-face-attribute 'org-code nil :inherit '(shadow fixed-pitch))
@@ -651,16 +646,16 @@ Code block functionality
 (add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
 #+end_src
 
-** org-bullets
+** org-modern
 
-Allows customization of bullets (*)
+Improve how org mode looks
 
 #+begin_src emacs-lisp
-(use-package org-bullets
+(use-package org-modern
   :after org
-  :hook (org-mode . org-bullets-mode)
-  :custom
-  (org-bullets-bullet-list '("" "" "" "" "")))
+  :hook (org-mode . org-modern-mode)
+  :config
+  (set-face-attribute 'org-modern-symbol nil :family "SymbolsNerdFontMono"))
 #+end_src
 
 ** visual-fill-mode
