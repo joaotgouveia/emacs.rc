@@ -323,7 +323,7 @@ NOTE: Not used atm
   :init
   (setq initial-buffer-choice (lambda () (get-buffer-create dashboard-buffer-name)))
   :custom
-  (dashboard-startup-banner "~/emacs.rc/logo.txt")
+  (dashboard-startup-banner "~/dev/emacs.rc/resources/logo.txt")
   (dashboard-icon-type 'nerd-icons)
   (dashboard-set-heading-icons t)
   (dashboard-set-file-icons t)
