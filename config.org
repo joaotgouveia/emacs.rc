@@ -88,6 +88,7 @@ NOTE: remove for org mode (?)
 (add-to-list 'nerd-icons-extension-icon-alist '("mjs" nerd-icons-devicon "nf-dev-javascript" :face nerd-icons-yellow))
 (add-to-list 'nerd-icons-extension-icon-alist '("l" nerd-icons-mdicon "nf-md-arm_flex" :face nerd-icons-yellow))
 (add-to-list 'nerd-icons-extension-icon-alist '("y" nerd-icons-mdicon "nf-md-alpha_y_box" :face nerd-icons-blue))
+(add-to-list 'nerd-icons-extension-icon-alist '("qml" nerd-icons-mdicon "nf-md-alpha_q" :face nerd-icons-green))
 #+end_src
 
 ** nerd-icons-dired
@@ -578,6 +579,13 @@ Improvements to the basic compilation mode
 #+begin_src emacs-lisp
 (define-derived-mode yacc-mode c++-mode "yacc")
 (add-to-list 'auto-mode-alist '(".*\\.y\\'" . yacc-mode))
+#+end_src
+
+** qml-mode
+
+#+begin_src emacs-lisp
+(require 'qml-mode)
+(add-to-list 'auto-mode-alist '(".*\\.qml\\'" . qml-mode))
 #+end_src
 
 ** hl-line-mode
