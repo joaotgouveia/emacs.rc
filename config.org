@@ -33,6 +33,8 @@
 ** Base UI
 
 #+begin_src emacs-lisp
+;; fullscreen startup
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
 ;; minimalistic ui
 (setq-default inhibit-startup-message t            ; disable startup screen
               ring-bell-function 'ignore           ; disable sounds
