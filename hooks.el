@@ -47,7 +47,7 @@
 (defun jg/org-tangle-hook ()
   "Auto tangle config file on save (strongly inspired by SystemCrafter's config)."
   (when (string-equal (buffer-file-name)
-                      (expand-file-name "~/emacs.rc/config.org"))
+                      (expand-file-name "~/dev/emacs.rc/config.org"))
     ;; Dynamic scoping to the rescue
     (let ((org-confirm-babel-evaluate nil))
       (org-babel-tangle))))
