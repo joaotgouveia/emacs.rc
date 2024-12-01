@@ -74,7 +74,6 @@
 #+end_src
 
 ** Auto pairing
-
 NOTE: remove for org mode (?)
 
 #+begin_src emacs-lisp
@@ -102,7 +101,6 @@ NOTE: remove for org mode (?)
 #+end_src
 
 ** page-break-lines
-
 Displays ugly form feed characters as tidy horizontal rules
 
 #+begin_src emacs-lisp
@@ -142,7 +140,6 @@ Displays ugly form feed characters as tidy horizontal rules
 #+end_src
 
 ** solaire-mode
-
 Visually distinguish real buffers from pop-ups, sidebars, etc
 
 #+begin_src emacs-lisp
@@ -154,7 +151,6 @@ Visually distinguish real buffers from pop-ups, sidebars, etc
 
 * General
 ** auto-package-update
-
 Automatically update packages
 
 #+begin_src emacs-lisp
@@ -205,7 +201,6 @@ Automatically update packages
 #+end_src
 
 ** ivy-rich
-
 Adds extra info when listing commands with Ivy
 
 #+begin_src emacs-lisp
@@ -214,7 +209,6 @@ Adds extra info when listing commands with Ivy
 #+end_src
 
 ** which-key
-
 Pops up a panel when using a bind, explaining what you can do with it
 
 #+begin_src emacs-lisp
@@ -226,7 +220,6 @@ Pops up a panel when using a bind, explaining what you can do with it
 #+end_src
 
 ** heplful
-
 Better help functions
 
 #+begin_src emacs-lisp
@@ -241,7 +234,6 @@ Better help functions
 #+end_src
 
 ** general
-
 Define keybinds in a more concise way
 
 #+begin_src emacs-lisp
@@ -260,7 +252,6 @@ Define keybinds in a more concise way
 #+end_src
 
 ** undo-fu
-
 Better undo and redo
 
 #+begin_src emacs-lisp
@@ -268,7 +259,6 @@ Better undo and redo
 #+end_src
 
 ** hydra
-
 Temporary bindings for repetitive actions
 
 #+begin_src emacs-lisp
@@ -276,7 +266,6 @@ Temporary bindings for repetitive actions
 #+end_src
 
 ** evil
-
 Vim keybindings
 
 #+begin_src emacs-lisp
@@ -300,7 +289,6 @@ Vim keybindings
 #+end_src
 
 ** evil-collection
-
 Evil keybindings for different emacs modes
 
 #+begin_src emacs-lisp
@@ -311,7 +299,6 @@ Evil keybindings for different emacs modes
 #+end_src
 
 ** multiple-cursors
-
 NOTE: Not used atm
 
 #+begin_src emacs-lisp
@@ -357,7 +344,6 @@ NOTE: Not used atm
 #+end_src
 
 ** pdf-tools
-
 View pdfs inside emacs
 
 #+begin_src emacs-lisp
@@ -423,7 +409,6 @@ View pdfs inside emacs
 #+end_src
 
 ** projectile
-
 Managing projects
 
 #+begin_src emacs-lisp
@@ -438,7 +423,6 @@ Managing projects
 #+end_src
 
 ** counsel-projectile
-
 Improve projectile and ivy integration
 
 #+begin_src emacs-lisp
@@ -447,7 +431,6 @@ Improve projectile and ivy integration
 #+end_src
 
 ** magit
-
 Git integration
 
 #+begin_src emacs-lisp
@@ -458,7 +441,6 @@ Git integration
 #+end_src
 
 ** forge
-
 GitHub integration (open prs, see issues, etc.)
 
 #+begin_src emacs-lisp
@@ -466,7 +448,6 @@ GitHub integration (open prs, see issues, etc.)
 #+end_src
 
 ** flycheck
-
 On-the-fly syntax checking
 
 #+begin_src emacs-lisp
@@ -476,7 +457,6 @@ On-the-fly syntax checking
 #+end_src
 
 ** lsp-mode
-
 LSP support
 
 #+begin_src emacs-lisp
@@ -502,7 +482,6 @@ LSP support
 #+end_src
 
 ** lsp-ui
-
 Higher level UI modules (flycheck support, code lenses, etc.)
 
 #+begin_src emacs-lisp
@@ -513,7 +492,6 @@ Higher level UI modules (flycheck support, code lenses, etc.)
 #+end_src
 
 ** lsp-java
-
 Handle server installation and session management.
 
 #+begin_src emacs-lisp
@@ -525,7 +503,6 @@ Handle server installation and session management.
 #+end_src
 
 ** company-mode
-
 Better completions
 
 #+begin_src emacs-lisp
@@ -537,7 +514,6 @@ Better completions
 #+end_src
 
 ** fancy-compilation
-
 Improvements to the basic compilation mode
 
 #+begin_src emacs-lisp
@@ -605,7 +581,6 @@ Improvements to the basic compilation mode
 #+end_src
 
 ** hl-line-mode
-
 Highlight current line
 
 #+begin_src emacs-lisp
@@ -646,7 +621,6 @@ Highlight current line
 #+end_src
 
 ** DVISVGm
-
 Use SVGs to display latex formulas
 
 #+begin_src emacs-lisp
@@ -660,7 +634,6 @@ Use SVGs to display latex formulas
 #+end_src
 
 ** Babel
-
 Code block functionality
 
 #+begin_src emacs-lisp
@@ -677,7 +650,6 @@ Code block functionality
 #+end_src
 
 ** org-modern
-
 Improve how org mode looks
 
 #+begin_src emacs-lisp
@@ -689,7 +661,6 @@ Improve how org mode looks
 #+end_src
 
 ** visual-fill-mode
-
 Center text on screen
 
 #+begin_src emacs-lisp
@@ -699,7 +670,6 @@ Center text on screen
 #+end_src
 
 ** org-sidebar
-
 Sidebar for org files
 
 #+begin_src emacs-lisp
@@ -710,7 +680,6 @@ Sidebar for org files
 #+end_src
 
 ** org-present
-
 Slides in org-mode
 
 #+begin_src emacs-lisp
@@ -720,7 +689,6 @@ Slides in org-mode
 
 
 * Note taking
-
 A lot of inspiration for this setup came from:
 - [[https://jonathanabennett.github.io/blog/2019/05/29/writing-academic-papers-with-org-mode/][Writing academic papers with org mode]]
 - [[https://honnef.co/articles/my-org-roam-workflows-for-taking-notes-and-writing-articles/][My org-roam workflows for taking notes and writing articles]]
@@ -728,7 +696,6 @@ A lot of inspiration for this setup came from:
 - [[https://emacsconf.org/2021/talks/research/][EmacsConf 2021: Managing a research workflow (bibliographies, note-taking, and arXiv)]]
 
 ** org-cite
-
 Insert citations
 
 #+begin_src emacs-lisp
@@ -740,7 +707,6 @@ Insert citations
 #+end_src
 
 ** citar
-
 Improvements to the basic org-cite frontend
 
 #+begin_src emacs-lisp
@@ -782,7 +748,6 @@ Improvements to the basic org-cite frontend
 #+end_src
 
 ** citeproc
-
 Rendering citations and bibliographies in styles described in CSL
 
 #+begin_src emacs-lisp
@@ -796,7 +761,6 @@ Rendering citations and bibliographies in styles described in CSL
 #+end_src
 
 ** org-roam
-
 Used for blog posts and literature and permanent notes
 
 #+begin_src emacs-lisp
@@ -825,7 +789,6 @@ Used for blog posts and literature and permanent notes
 #+end_src
 
 ** citar-org-roam
-
 Tighter citar and org-roam integration
 
 #+begin_src emacs-lisp
@@ -837,7 +800,6 @@ Tighter citar and org-roam integration
 #+end_src
 
 ** org-capture
-
 Used for project and fleeting notes
 
 #+begin_src emacs-lisp
@@ -853,9 +815,7 @@ Used for project and fleeting notes
 
 
 * Socials
-
 ** ement
-
 Matrix client
 
 #+begin_src emacs-lisp
