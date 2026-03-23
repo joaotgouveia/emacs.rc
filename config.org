@@ -701,17 +701,6 @@ A lot of inspiration for this setup came from:
 - [[https://kristofferbalintona.me/posts/202206141852/][Citations in org-mode: Org-cite and Citar]]
 - [[https://emacsconf.org/2021/talks/research/][EmacsConf 2021: Managing a research workflow (bibliographies, note-taking, and arXiv)]]
 
-** org-cite
-Insert citations
-
-#+begin_src emacs-lisp
-(evil-define-key '(normal insert) org-mode-map
-  (kbd "C-c ]") 'org-cite-insert)
-
-(setq org-cite-csl-styles-dir (expand-file-name "~/docs/bibliography/zotero/styles/"))
-(setq org-cite-export-processors '((t . (csl "ieee.csl"))))
-#+end_src
-
 ** citar
 Improvements to the basic org-cite frontend
 
