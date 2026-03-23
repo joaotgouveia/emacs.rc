@@ -173,9 +173,10 @@ Automatically update packages
     :map minibuffer-local-map
     ("C-r" . 'counsel-minibuffer-history))
   :config
+    (setq ivy-use-selectable-prompt t)
   ;; don't start searches with ^
   ;;(setq ivy-initial-inputs-alist nil)
-  )
+)
 #+end_src
 
 ** ivy
