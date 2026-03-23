@@ -809,17 +809,27 @@ Used for project and fleeting notes
 #+end_src
 
 
-* Socials
-** ement
-Matrix client
+* News
+** elfeed
+RSS feed
 
 #+begin_src emacs-lisp
-(use-package ement
+(use-package elfeed
   :config
-  (setq ement-room-left-margin-width 0
-        ement-room-right-margin-width 0
-        ement-room-sender-headers t
-        ement-room-sender-in-headers t
-        ement-room-sender-in-left-margin nil
-        ement-room-prism 'both))
+  (setq elfeed-feeds
+        '("https://www.phoronix.com/rss.php")))
+(setq-default elfeed-search-filter "@1-week-ago +unread ")
+
+(add-hook 'elfeed-new-entry-hook
+          (elfeed-make-tagger :before "1 week ago"
+                              :remove 'unread))
+(global-set-key (kbd "C-x w") 'elfeed)
+#+end_src
+
+** elfeed-goodies
+elfeed improvements
+
+#+begin_src emacs-lisp
+(use-package elfeed-goodies)
+(elfeed-goodies/setup)
 #+end_src
