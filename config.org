@@ -626,6 +626,13 @@ Use SVGs to display latex formulas
 (setq org-preview-latex-default-process 'dvisvgm)
 #+end_src
 
+** format-latex
+Configuration options for ~latex-preview~
+
+#+begin_src emacs-lisp
+(setq org-format-latex-options (plist-put org-format-latex-options :scale 0.5))
+#+end_src
+
 ** Whitespace handling
 
 #+begin_src emacs-lisp
