@@ -494,6 +494,13 @@ Handle server installation and session management.
   (setq lsp-java-format-settings-url "~/.config/java-formatter/eclipse-java-google-style.xml"))
 #+end_src
 
+** yasnippet
+
+#+begin_src emacs-lisp
+(use-package yasnippet
+  :hook (prog-mode . yas-minor-mode))
+#+end_src
+
 ** company-mode
 Better completions
 
