@@ -765,16 +765,16 @@ Used for blog posts and literature and permanent notes
     (org-roam-directory "~/wiki/slipbox")
     (org-roam-capture-templates
      '(("p" "permanent note" plain
-      "* ${title}\n\n%?\n\n"
+      "\n* ${title}\n\n%?\n\n"
       :if-new
       (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
-      "#+title: ${title}\n#+date: %U\n\n")
+      "#+title: ${title}\n#+date: %U\n#+STARTUP: latexpreview inlineimages\n")
       :unnarrowed t)
        ("l" "literature note" plain
       "\n\n* %?\n\n"
       :if-new
       (file+head "%(expand-file-name citar-org-roam-subdir org-roam-directory)/${citar-citekey}.org"
-      "#+title: ${note-title}\n#+date: %U\n")
+      "#+title: ${note-title}\n#+date: %U\n#+STARTUP: latexpreview inlineimages\n")
       :unnarrowed t)))
     :bind (("C-c n l" . org-roam-buffer-toggle)
            ("C-c n f" . org-roam-node-find)
