@@ -875,6 +875,7 @@ RSS feed
 
 #+begin_src emacs-lisp
 (use-package elfeed
+  :bind ("C-x w" . elfeed)
   :config
   (setq elfeed-feeds
         '("https://www.phoronix.com/rss.php")))
@@ -883,7 +884,6 @@ RSS feed
 (add-hook 'elfeed-new-entry-hook
           (elfeed-make-tagger :before "1 week ago"
                               :remove 'unread))
-(global-set-key (kbd "C-x w") 'elfeed)
 #+end_src
 
 ** elfeed-goodies
