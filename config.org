@@ -707,7 +707,7 @@ Improvements to the basic org-cite frontend
 #+begin_src emacs-lisp
 (use-package citar
   :custom
-  (org-cite-global-bibliography '("~/docs/bibliography/library.bib"))
+  (org-cite-global-bibliography '("~/wiki/slipbox/library.bib"))
   (org-cite-insert-processor 'citar)
   (org-cite-follow-processor 'citar)
   (org-cite-activate-processor 'citar)
