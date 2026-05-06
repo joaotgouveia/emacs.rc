@@ -278,10 +278,10 @@ Temporary bindings for repetitive actions
 Vim keybindings
 
 #+begin_src emacs-lisp
+(setq evil-want-keybinding nil)
 (use-package evil
   :init
   (setq evil-want-integration t)
-  (setq evil-want-keybinding nil)
   (setq evil-want-C-i-jump nil)
   :config
   (evil-mode t)
@@ -433,9 +433,12 @@ Git integration
 
 #+begin_src emacs-lisp
 (use-package magit
+  :bind (("C-x g" . magit-status)
+         ("C-c g" . magit-dispatch)
+         ("C-c f" . magit-file-dispatch))
   :custom
-  (magit-display-buffer-function
-  #'magit-display-buffer-same-window-except-diff-v1))
+  (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1)
+)
 #+end_src
 
 ** forge
@@ -877,19 +880,16 @@ RSS feed
 (use-package elfeed
   :config
   (setq elfeed-feeds
-        '("https://www.phoronix.com/rss.php")))
-(setq-default elfeed-search-filter "@1-week-ago +unread ")
+    '(("https://www.phoronix.com/rss.php" phoronix tech)
+      ("https://blog.cloudflare.com/rss" cloudflare tech)
+      ("https://www.aeaweb.org/research/rss-feed" aea economics)
+      ("https://www.federalreserve.gov/feeds/ifdp.xml" ifdb economics)
+      ("https://www.federalreserve.gov/feeds/feds.xml" feds economics)
+      ("https://www.federalreserve.gov/feeds/feds_notes.xml" feds-notes economics))))
+  (setq-default elfeed-search-filter "@1-week-ago +unread ")
 
 (add-hook 'elfeed-new-entry-hook
           (elfeed-make-tagger :before "1 week ago"
                               :remove 'unread))
 (global-set-key (kbd "C-x w") 'elfeed)
-#+end_src
-
-** elfeed-goodies
-elfeed improvements
-
-#+begin_src emacs-lisp
-(use-package elfeed-goodies)
-(elfeed-goodies/setup)
 #+end_src
