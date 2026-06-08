@@ -2,11 +2,6 @@
 #+PROPERTY: header-args:emacs-lisp :tangle ./init.el
 
 * Base setup
-** Load Path
-
-#+begin_src emacs-lisp
-(add-to-list 'load-path "./modes/")
-#+end_src
 
 ** Hooks
 
@@ -618,12 +613,6 @@ Improvements to the basic compilation mode
 (use-package company-coq
   :hook
   (coq-mode-hook . company-coq-mode))
-#+end_src
-
-** llvm-coding-guidelines
-
-#+begin_src emacs-lisp
-(load "./modes/llvm-coding-guidelines.el")
 #+end_src
 
 ** hl-line-mode
