@@ -586,6 +586,12 @@ Improvements to the basic compilation mode
 (use-package yaml-mode)
 #+end_src
 
+** dockerfile-mode
+
+#+begin_src emacs-lisp
+(use-package dockerfile-mode)
+#+end_src
+
 ** solidity-mode
 
 #+begin_src emacs-lisp
