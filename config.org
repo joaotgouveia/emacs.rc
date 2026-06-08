@@ -396,7 +396,9 @@ NOTE: Not used atm
 #+begin_src emacs-lisp
 (setq major-mode-remap-alist
   '((javascript-mode . js-ts-mode)
-    (c-mode . c-ts-mode)))
+    (c-mode . c-ts-mode)
+    (python-mode . python-ts-mode)
+))
 #+end_src
 
 ** evil-nerd-commenter
@@ -467,7 +469,7 @@ LSP support
   :init
   (setq lsp-keymap-prefix "C-c l"
         read-process-output-max (* 1024 1024))
-  :hook ((python-mode . lsp-deferred)
+  :hook ((python-ts-mode . lsp-deferred)
          (js-ts-mode . lsp-deferred)
          (c-ts-mode . lsp-deferred)
          (c++-mode . lsp-deferred)
@@ -583,28 +585,10 @@ Improvements to the basic compilation mode
 (add-to-list 'auto-mode-alist '(".*\\.y\\'" . yacc-mode))
 #+end_src
 
-** qml-mode
+** yaml-mode
 
 #+begin_src emacs-lisp
-(require 'qml-mode)
-#+end_src
-
-** llvm-mode
-
-#+begin_src emacs-lisp
-(require 'llvm-mode)
-#+end_src
-
-** llvm-mir-mode
-
-#+begin_src emacs-lisp
-(require 'llvm-mir-mode)
-#+end_src
-
-** tablegen-mode
-
-#+begin_src emacs-lisp
-(require 'tablegen-mode)
+(use-package yaml-mode)
 #+end_src
 
 ** solidity-mode
