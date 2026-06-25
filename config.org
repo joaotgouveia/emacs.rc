@@ -860,10 +860,6 @@ RSS feed
   :config
   (setq elfeed-feeds
     '(("https://www.phoronix.com/rss.php" phoronix tech)
-      ("https://blog.cloudflare.com/rss" cloudflare tech)
-      ("https://www.aeaweb.org/research/rss-feed" aea economics)
-      ("https://www.federalreserve.gov/feeds/ifdp.xml" ifdb economics)
-      ("https://www.federalreserve.gov/feeds/feds.xml" feds economics)
       ("https://www.federalreserve.gov/feeds/feds_notes.xml" feds-notes economics))))
   (setq-default elfeed-search-filter "@1-week-ago +unread ")
 
